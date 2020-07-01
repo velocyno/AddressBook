@@ -1,7 +1,7 @@
 from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
-from pages.adresses_object import AddressesSearchHelper
-from selenium.webdriver.common.keys import Keys
+from pages.adresses_object import (AddressesLocators as AL,
+                                   AddressesSearchHelper)
 
 
 def test_add_address(browser_fixture):
@@ -16,7 +16,9 @@ def test_add_address(browser_fixture):
     page.click_sign_in_btn()
     common.click_addresses()
     addresses.click_new_addresses_link()
-    addresses.first_name_field().send_keys("Andrii")
-    addresses.first_name_field().send_keys(Keys.TAB)
-    addresses.first_name_field().send_keys("Andrii")
+    addresses.set_data_to_field(AL.locator_first_name_field, "Andrii")
+    addresses.set_data_to_field(AL.locator_last_name_field, "AQA")
+    addresses.set_data_to_field(AL.locator_address1_field, "Lviv")
     breakpoint()
+
+

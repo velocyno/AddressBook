@@ -16,13 +16,19 @@ class AddressesLocators:
     locator_address_country_canada = (By.ID, "address_country_canada")
     locator_birthday = (By.NAME, "address[birthday]")
     locator_color = (By.NAME, "address[color]")
-
+    locator_age = (By.NAME, "address[age]")
+    locator_website = (By.NAME, "address[website]")
+    locator_picture = (By.ID, 'address_picture')
+    locator_phone = (By.NAME, "address[phone]")
+    locator_climbing = (By.ID, "address_interest_climb")
+    locator_dancing = (By.ID, "address_interest_dance")
+    locator_reading = (By.ID, "address_interest_read")
 
 
 class AddressesSearchHelper(BasePage):
-    def click_new_addresses_link(self):
+    def click_on_element(self, locator):
         return self.find_element(
-            AddressesLocators.locator_new_address_link, time=2)\
+            locator, time=2)\
             .click()
 
     def set_data_to_field(self, field_locator, data):
@@ -30,10 +36,14 @@ class AddressesSearchHelper(BasePage):
             field_locator, time=2)\
             .send_keys(data)
 
-    def select_state_dropdown(self, state):
+    def select_dropdown_option(self, dropdown_locator, option):
         dropdown = Select(self.find_element(
-            AddressesLocators.locator_state, time=2))
-        return dropdown.select_by_visible_text(state)
+            dropdown_locator, time=2))
+        return dropdown.select_by_visible_text(option)
 
-    def select_radio_button(self, radio_locator):
-        return self.find_element(radio_locator, time=2).click()
+    def find_element_by_locator(self, locator):
+        return self.find_element(locator, time=2)
+
+    def select_element(self, locator):
+        element = Select(self.find_element(locator, time=2))
+        return element

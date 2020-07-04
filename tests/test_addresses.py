@@ -2,6 +2,17 @@ from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
 from pages.adresses_object import (AddressesLocators as AL,
                                    AddressesSearchHelper)
+# from selenium import webdriver
+#
+# driver = webdriver.Chrome(
+#         executable_path="C:\\Users\\Andrii\\PycharmProjects\\"
+#                         "testaddressbook\\chromedriver.exe")
+
+first_name = "Andrii"
+last_name = "AQA"
+address1 = "Street"
+address2 = "Street2"
+
 
 
 def test_add_address(browser_fixture):
@@ -16,10 +27,10 @@ def test_add_address(browser_fixture):
     page.click_sign_in_btn()
     common.click_addresses()
     addresses.click_on_element(AL.locator_new_address_link)
-    addresses.set_data_to_field(AL.locator_first_name_field, "Andrii")
-    addresses.set_data_to_field(AL.locator_last_name_field, "AQA")
-    addresses.set_data_to_field(AL.locator_address1_field, "Street")
-    addresses.set_data_to_field(AL.locator_address2_field, "Street2")
+    addresses.set_data_to_field(AL.locator_first_name_field, first_name)
+    addresses.set_data_to_field(AL.locator_last_name_field, last_name)
+    addresses.set_data_to_field(AL.locator_address1_field, address1)
+    addresses.set_data_to_field(AL.locator_address2_field, address2)
     addresses.set_data_to_field(AL.locator_city, "Lviv")
     addresses.select_dropdown_option(AL.locator_state, "Alaska")
     addresses.set_data_to_field(AL.locator_zip_code, "79000")
@@ -33,6 +44,12 @@ def test_add_address(browser_fixture):
     addresses.click_on_element(AL.locator_climbing)
     addresses.click_on_element(AL.locator_dancing)
     addresses.click_on_element(AL.locator_reading)
+    addresses.set_data_to_field(AL.locator_note, "Test note")
+    addresses.click_on_element(AL.locator_create_address_btn)
+    container = addresses.find_element_by_locator(AL.locator_result_container)
+    options = container.text.split('\n')
+    # for option
+
     breakpoint()
 
 

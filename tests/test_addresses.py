@@ -46,11 +46,13 @@ def test_add_address(browser_fixture):
     addresses.click_on_element(AL.locator_reading)
     addresses.set_data_to_field(AL.locator_note, "Test note")
     addresses.click_on_element(AL.locator_create_address_btn)
-    container = addresses.find_element_by_locator(AL.locator_result_container)
-    options = container.text.split('\n')
+    container = addresses.find_element_by_locator(AL.locator_result_container).text.split('\n')
+    # options = container.text.split('\n')
     # for option
 
-    breakpoint()
+    # breakpoint()
+
+
 
 
 

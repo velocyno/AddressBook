@@ -5,6 +5,9 @@ from selenium.webdriver.support.ui import Select
 
 class AddressesLocators:
     locator_new_address_link = (By.LINK_TEXT, "New Address")
+    locator_show_list_link = (By.LINK_TEXT, "List")
+    locator_edit_address_link = (By.LINK_TEXT, "Edit")
+    locator_destroy_address_link = (By.LINK_TEXT, "Destroy")
     locator_first_name_field = (By.NAME, "address[first_name]")
     locator_last_name_field = (By.NAME, "address[last_name]")
     locator_address1_field = (By.NAME, "address[address1]")
@@ -24,7 +27,7 @@ class AddressesLocators:
     locator_dancing = (By.ID, "address_interest_dance")
     locator_reading = (By.ID, "address_interest_read")
     locator_note = (By.ID, "address_note")
-    locator_create_address_btn = (By.NAME, "commit")
+    locator_create_update_address_btn = (By.NAME, "commit")
     locator_result_container = (By.CLASS_NAME, "container")
     locator_container_values = (By.CLASS_NAME, "col-3 col-md-2")
 
@@ -48,4 +51,7 @@ class AddressesSearchHelper(BasePage):
     def find_element_by_locator(self, locator):
         return self.find_element(locator, time=2)
 
+    def select_element_by_locator(self, locator):
+        element = Select(self.find_element(locator, time=2))
+        return element
 

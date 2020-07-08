@@ -3,6 +3,7 @@ from pages.common_objects import CommonSearchHelper
 from pages.adresses_object import (AddressesLocators as AL,
                                    AddressesSearchHelper)
 from selenium.webdriver.common.keys import Keys
+import time
 
 
 def test_add_address(browser_fixture):
@@ -36,14 +37,16 @@ def test_add_address(browser_fixture):
     addresses.click_on_element(AL.locator_reading)
     addresses.set_data_to_field(AL.locator_note, "Test note")
     addresses.click_on_element(AL.locator_create_update_address_btn)
+    # breakpoint()
     assert addresses.find_element_by_locator(
         AL.locator_result_container).text.split('\n')[0]\
            == "Address was successfully created."
     addresses.click_on_element(AL.locator_show_list_link)
-    addresses.click_on_element(AL.locator_destroy_address_link)
+    # addresses.click_on_element(AL.locator_destroy_address_link)
     # breakpoint()
-    popup = addresses.driver.switch_to_alert()  # Not working
-    popup.accept()
+    # popup = addresses.driver.switch_to.alert  # Not working
+    # time.sleep(2)
+    # popup.accept()
 
 
 def test_edit_addresses(browser_fixture):

@@ -29,7 +29,9 @@ class AddressesLocators:
     locator_note = (By.ID, "address_note")
     locator_create_update_address_btn = (By.NAME, "commit")
     locator_result_container = (By.CLASS_NAME, "container")
-    locator_container_values = (By.CLASS_NAME, "col-3 col-md-2")
+    locator_container_options = (By.XPATH, "//p")
+    # locator_container_options_key = (By.XPATH, ".//span[1]")
+    # locator_container_options_value = (By.XPATH, ".//span[2]")
 
 
 class AddressesSearchHelper(BasePage):
@@ -50,6 +52,9 @@ class AddressesSearchHelper(BasePage):
 
     def find_element_by_locator(self, locator):
         return self.find_element(locator, time=2)
+
+    def find_elements_by_locator(self, locator, time=10):
+        return self.find_elements(locator, time=2)
 
     def select_element_by_locator(self, locator):
         element = Select(self.find_element(locator, time=2))

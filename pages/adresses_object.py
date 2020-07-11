@@ -42,12 +42,15 @@ class AddressesSearchHelper(BasePage):
             .click()
 
     def click_on_element_if_yes(self, locator, option):
+        element = self.find_element_by_locator(locator)
         if option == 'Yes':
-            return self.find_element(
-                locator, time=2)\
-                .click()
+            return element.click()
         elif option == 'No':
-            pass
+            element.get_attribute("checked")
+            if element.get_attribute("checked"):
+                element.click()
+            else:
+                pass
         else:
             raise Exception("Provide 'Yes' or 'No'")
 
@@ -72,13 +75,16 @@ class AddressesSearchHelper(BasePage):
         element = Select(self.find_element(locator, time=2))
         return element
 
-    def select_sate(self, state):
+    def select_state(self, state):
         if state == "us":
             self.click_on_element(AddressesLocators.locator_address_country_us)
         elif state == "canada":
             self.click_on_element(AddressesLocators.locator_address_country_canada)
         else:
             pass
+
+    def clean_field(self, locator):
+        return self.find_element_by_locator(locator).clear()
 
 
 class Converters:
@@ -89,3 +95,7 @@ class Converters:
 
     def rgb_to_hex(self, rgb):
         return '#%02x%02x%02x' % rgb
+
+    def date_converter(self, date):
+        mm, dd, yyyy = date.split('/')
+        return f'{dd}/{mm}/{yyyy}'

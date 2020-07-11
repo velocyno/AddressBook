@@ -4,10 +4,10 @@ container = ['Address was successfully created.', 'First name:', 'Andrii', 'Last
              'Phone:', '123456', 'Climbing?', 'Yes', 'Dancing?', 'Yes', 'Reading?', 'Yes', 'Note:', 'Test note',
              'Edit', '  |  ', 'List']
 
-j = 0
-for i in container:
-    print(f'{j}: {i}')
-    j += 1
+# j = 0
+# for i in container:
+#     print(f'{j}: {i}')
+#     j += 1
 #
 # def hex_to_rgb(value):
 #     value = value.lstrip('#')
@@ -24,7 +24,7 @@ for i in container:
 #
 # print(rgb_to_hex((0, 255, 51)))
 
-from pages.adresses_object import Converters
+# from pages.adresses_object import Converters
 
 # converter = Converters()
 # # print(converter.rgb_to_hex((0, 255, 51)))
@@ -48,5 +48,28 @@ lr = {
     'Reading?': 'Yes',
     'Note:': 'Test note'
 }
+print(lr['Age:'])
 
-date = "6/11/1985"
+# date = "6/11/1985"
+#
+# mm, dd, yyyy = date.split('/')
+# print(f'{dd}/{mm}/{yyyy}')
+
+d1 = {'First name:': 'Andrii2',
+      'Last name:': 'AQA2',
+      'Street Address:': 'Street2',
+      'Secondary Address:': 'Street22',
+      'City:': 'Lviv2',
+      'State:': 'AZ',
+      'Zip code:': '790002',
+      'Country:': 'canada',
+      'Birthday:': '6/12/1985',
+      'Color:': (0, 123, 26),
+      'Age:': '36',
+      'Website:': 'https://www.site2.com',
+      'Phone:': '1234562',
+      'Climbing?': 'No',
+      'Dancing?': 'No',
+      'Reading?': 'No',
+      'Note:': 'Test note2'}
+

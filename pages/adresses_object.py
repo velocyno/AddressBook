@@ -45,10 +45,11 @@ class AddressesSearchHelper(BasePage):
             field_locator, time=2)\
             .send_keys(data)
 
-    def select_dropdown_option(self, dropdown_locator, option):
+    def select_dropdown_option(self, dropdown_locator, value):
         dropdown = Select(self.find_element(
             dropdown_locator, time=2))
-        return dropdown.select_by_visible_text(option)
+        # return dropdown.select_by_visible_text(option)
+        return dropdown.select_by_value(value)
 
     def find_element_by_locator(self, locator):
         return self.find_element(locator, time=2)
@@ -60,3 +61,12 @@ class AddressesSearchHelper(BasePage):
         element = Select(self.find_element(locator, time=2))
         return element
 
+
+class Converters:
+    def hex_to_rgb(self, value):
+        value = value.lstrip('#')
+        lv = len(value)
+        return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+
+    def rgb_to_hex(self, rgb):
+        return '#%02x%02x%02x' % rgb

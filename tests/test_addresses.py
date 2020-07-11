@@ -2,6 +2,7 @@ from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
 from pages.adresses_object import AddressesLocators as AL
 from pages.adresses_object import AddressesSearchHelper
+from pages.adresses_object import Converters
 import time
 
 
@@ -22,11 +23,14 @@ def test_add_address(browser_fixture):
     addresses.set_data_to_field(AL.locator_address1_field, "Street")
     addresses.set_data_to_field(AL.locator_address2_field, "Street2")
     addresses.set_data_to_field(AL.locator_city, "Lviv")
-    addresses.select_dropdown_option(AL.locator_state, "Alaska")
+    addresses.select_dropdown_option(AL.locator_state, "AK")
+    breakpoint()
     addresses.set_data_to_field(AL.locator_zip_code, "79000")
     addresses.click_on_element(AL.locator_address_country_us)
     addresses.set_data_to_field(AL.locator_birthday, "11.06.1985")
-    addresses.set_data_to_field(AL.locator_color, "#00FF33")
+    # addresses.set_data_to_field(AL.locator_color, "#00FF33")
+    converter = Converters()
+    addresses.set_data_to_field(AL.locator_color, converter.rgb_to_hex((0, 255, 51)))
     addresses.set_data_to_field(AL.locator_age, "35")
     addresses.set_data_to_field(AL.locator_website, "https://www.site.com")
     addresses.find_element_by_locator(AL.locator_picture).send_keys("C:\\123.png")
@@ -39,14 +43,12 @@ def test_add_address(browser_fixture):
     dict_results = {}
     results = addresses.find_elements_by_locator(AL.locator_container_options)
     for element in results:
-        key = element.find_element_by_xpath('.//span[1]')
-        breakpoint()
-
-        value = element.find_element_by_xpath('.//span[2]')
+        key = element.find_element_by_xpath('.//span[1]').text
+        value = element.find_element_by_xpath('.//span[2]').text
+        if key == 'Color:':
+            value = (0, 255, 51)
         dict_results[key] = value
-        # key_data = web_element.find_element_by_locator(AL.locator_container_values_key)
-        # list_keys.append(key_data)
-
+    breakpoint()
     # assert addresses.find_element_by_locator(
     #     AL.locator_result_container).text.split('\n')[0]\
     #        == "Address was successfully created."
@@ -85,8 +87,5 @@ def test_add_address(browser_fixture):
 #         AL.locator_result_container).text.split('\n')[0] \
 #            == "Address was successfully updated."
 #     addresses.click_on_element(AL.locator_show_list_link)
-
-
-
 
 

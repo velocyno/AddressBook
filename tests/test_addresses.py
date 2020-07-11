@@ -25,17 +25,18 @@ def test_add_address(browser_fixture):
     addresses.set_data_to_field(AL.locator_city, "Lviv")
     addresses.select_dropdown_option(AL.locator_state, "AK")
     addresses.set_data_to_field(AL.locator_zip_code, "79000")
-    addresses.select_sate("")
-    addresses.set_data_to_field(AL.locator_birthday, "11.06.1985")
+    addresses.select_sate("us")
+    addresses.set_data_to_field(AL.locator_birthday, "11/06/1985")
+    breakpoint()
     converter = Converters()
     addresses.set_data_to_field(AL.locator_color, converter.rgb_to_hex((0, 255, 51)))
     addresses.set_data_to_field(AL.locator_age, "35")
     addresses.set_data_to_field(AL.locator_website, "https://www.site.com")
     addresses.find_element_by_locator(AL.locator_picture).send_keys("C:\\123.png")
     addresses.set_data_to_field(AL.locator_phone, "123456")
-    addresses.click_on_element(AL.locator_climbing)
-    addresses.click_on_element(AL.locator_dancing)
-    addresses.click_on_element(AL.locator_reading)
+    addresses.click_on_element_if_yes(AL.locator_climbing, "Yes")
+    addresses.click_on_element_if_yes(AL.locator_dancing, "Yes")
+    addresses.click_on_element_if_yes(AL.locator_reading, "Yes")
     addresses.set_data_to_field(AL.locator_note, "Test note")
     addresses.click_on_element(AL.locator_create_update_address_btn)
     dict_results = {}
@@ -46,7 +47,7 @@ def test_add_address(browser_fixture):
         if key == 'Color:':
             value = (0, 255, 51)
         dict_results[key] = value
-    breakpoint()
+    # breakpoint()
     # assert addresses.find_element_by_locator(
     #     AL.locator_result_container).text.split('\n')[0]\
     #        == "Address was successfully created."

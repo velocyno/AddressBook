@@ -49,3 +49,4 @@ lr = {
     'Note:': 'Test note'
 }
 
+date = "6/11/1985"

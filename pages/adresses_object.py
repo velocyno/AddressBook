@@ -41,6 +41,16 @@ class AddressesSearchHelper(BasePage):
             locator, time=2)\
             .click()
 
+    def click_on_element_if_yes(self, locator, option):
+        if option == 'Yes':
+            return self.find_element(
+                locator, time=2)\
+                .click()
+        elif option == 'No':
+            pass
+        else:
+            raise Exception("Provide 'Yes' or 'No'")
+
     def set_data_to_field(self, field_locator, data):
         return self.find_element(
             field_locator, time=2)\

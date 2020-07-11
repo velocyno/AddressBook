@@ -17,6 +17,7 @@ class AddressesLocators:
     locator_zip_code = (By.NAME, "address[zip_code]")
     locator_address_country_us = (By.ID, "address_country_us")
     locator_address_country_canada = (By.ID, "address_country_canada")
+    locator_address_state = (By.XPATH, '/*[@id="new_address"]/div[8]')
     locator_birthday = (By.NAME, "address[birthday]")
     locator_color = (By.NAME, "address[color]")
     locator_age = (By.NAME, "address[age]")
@@ -60,6 +61,14 @@ class AddressesSearchHelper(BasePage):
     def select_element_by_locator(self, locator):
         element = Select(self.find_element(locator, time=2))
         return element
+
+    def select_sate(self, state):
+        if state == "us":
+            self.click_on_element(AddressesLocators.locator_address_country_us)
+        elif state == "canada":
+            self.click_on_element(AddressesLocators.locator_address_country_canada)
+        else:
+            pass
 
 
 class Converters:

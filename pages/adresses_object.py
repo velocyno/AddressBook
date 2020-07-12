@@ -5,7 +5,8 @@ from selenium.webdriver.support.ui import Select
 
 class AddressesLocators:
     locator_new_address_link = (By.LINK_TEXT, "New Address")
-    locator_show_list_link = (By.LINK_TEXT, "List")
+    locator_list_link = (By.LINK_TEXT, "List")
+    locator_show_address_link = (By.LINK_TEXT, "Show")
     locator_edit_address_link = (By.LINK_TEXT, "Edit")
     locator_destroy_address_link = (By.LINK_TEXT, "Destroy")
     locator_first_name_field = (By.NAME, "address[first_name]")
@@ -62,13 +63,12 @@ class AddressesSearchHelper(BasePage):
     def select_dropdown_option(self, dropdown_locator, value):
         dropdown = Select(self.find_element(
             dropdown_locator, time=2))
-        # return dropdown.select_by_visible_text(option)
         return dropdown.select_by_value(value)
 
     def find_element_by_locator(self, locator):
         return self.find_element(locator, time=2)
 
-    def find_elements_by_locator(self, locator, time=10):
+    def find_elements_by_locator(self, locator):
         return self.find_elements(locator, time=2)
 
     def select_element_by_locator(self, locator):

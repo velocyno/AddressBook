@@ -92,7 +92,24 @@ class TestManageAddresses:
             AL.locator_result_container).text.split('\n')[0]\
                == "Address was successfully created."
         assert dict_data == dict_results
-        addresses.click_on_element(AL.locator_show_list_link)
+        addresses.click_on_element(AL.locator_list_link)
+
+    def test_show_address(self, browser_fixture):
+        addresses = AddressesSearchHelper(browser_fixture)
+        addresses.click_on_element(AL.locator_show_address_link)
+        time.sleep(2)
+        dict_results = {}
+        results = addresses.find_elements_by_locator(AL.locator_container_options)
+        for element in results:
+            key = element.find_element_by_xpath('.//span[1]').text
+            value = element.find_element_by_xpath('.//span[2]').text
+            if key == 'Color:':
+                value = element.find_element_by_xpath('.//span[2]')
+                value = value.get_attribute('style').split("rgb")[1].rstrip(";")
+            dict_results[key] = value
+            pass
+        assert dict_data == dict_results
+        addresses.click_on_element(AL.locator_list_link)
 
     def test_edit_addresses(self, browser_fixture):
         addresses = AddressesSearchHelper(browser_fixture)
@@ -140,7 +157,7 @@ class TestManageAddresses:
             AL.locator_result_container).text.split('\n')[0] \
                == "Address was successfully updated."
         assert dict_data_edit == dict_results
-        addresses.click_on_element(AL.locator_show_list_link)
+        addresses.click_on_element(AL.locator_list_link)
         addresses.click_on_element(AL.locator_destroy_address_link)
         popup = addresses.driver.switch_to.alert
         popup.accept()

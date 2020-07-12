@@ -158,10 +158,13 @@ class TestManageAddresses:
                == "Address was successfully updated."
         assert dict_data_edit == dict_results
         addresses.click_on_element(AL.locator_list_link)
+
+    def test_destroy_address(self, browser_fixture):
+        addresses = AddressesSearchHelper(browser_fixture)
         addresses.click_on_element(AL.locator_destroy_address_link)
         popup = addresses.driver.switch_to.alert
         popup.accept()
         time.sleep(2)
-
-
+        assert addresses.find_element_by_locator(
+            AL.locator_destroyed_message).text == "Address was successfully destroyed."
 

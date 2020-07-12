@@ -18,7 +18,7 @@ d2 = {'First name:': 'Andrii2',
 
 v = "(25, 150, 245)"
 tlv = []
-lv = (v[1:-1].split(", "))
+lv = v[1:-1].split(", ")
 for el in lv:
       tlv.append(int(el))
 ttlv = tuple(tlv)

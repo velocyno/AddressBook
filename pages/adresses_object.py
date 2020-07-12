@@ -93,9 +93,18 @@ class Converters:
         lv = len(value)
         return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
 
-    def rgb_to_hex(self, rgb):
-        return '#%02x%02x%02x' % rgb
+    def rgb_to_hex(self, rgb_str):
+        rgb_tuple = self.str_to_tuple(rgb_str)
+        return '#%02x%02x%02x' % rgb_tuple
 
     def date_converter(self, date):
         mm, dd, yyyy = date.split('/')
         return f'{dd}/{mm}/{yyyy}'
+
+    def str_to_tuple(self, data):
+        list_int_numbers = []
+        list_str_numbers = data[1:-1].split(", ")
+        for number in list_str_numbers:
+            list_int_numbers.append(int(number))
+        tuple_numbers = tuple(list_int_numbers)
+        return tuple_numbers

@@ -15,7 +15,7 @@ dict_data = {
     'Zip code:': '79000',
     'Country:': 'us',
     'Birthday:': '6/11/1985',
-    'Color:': (0, 255, 51),
+    'Color:': "(0, 255, 51)",
     'Age:': '35',
     'Website:': 'https://www.site.com',
     'Phone:': '123456',
@@ -64,9 +64,7 @@ def test_add_address(browser_fixture):
         value = element.find_element_by_xpath('.//span[2]').text
         if key == 'Color:':
             value = element.find_element_by_xpath('.//span[2]')
-            breakpoint()
             value = value.get_attribute('style').split("rgb")[1].rstrip(";")
-            breakpoint()
         dict_results[key] = value
     assert addresses.find_element_by_locator(
         AL.locator_result_container).text.split('\n')[0]\
@@ -88,10 +86,10 @@ dict_data_edit = {
     'Zip code:': '790002',
     'Country:': 'canada',
     'Birthday:': '6/12/1985',
-    'Color:': (25, 150, 245),
+    'Color:': "(25, 150, 245)",
     'Age:': '36',
     'Website:': 'https://www.site2.com',
-    'Phone:': '1234562',
+    'Phone:': '123-4562',
     'Climbing?': 'No',
     'Dancing?': 'No',
     'Reading?': 'No',
@@ -139,16 +137,17 @@ def test_edit_addresses(browser_fixture):
         value = element.find_element_by_xpath('.//span[2]').text
         if key == 'Color:':
             value = element.find_element_by_xpath('.//span[2]')
-            value = value.get_attribute('style').split("rgb")[1]
-            breakpoint()
+            value = value.get_attribute('style').split("rgb")[1].rstrip(";")
         dict_results[key] = value
     assert addresses.find_element_by_locator(
         AL.locator_result_container).text.split('\n')[0] \
            == "Address was successfully updated."
-    addresses.click_on_element(AL.locator_show_list_link)
-    breakpoint()
     assert dict_data_edit == dict_results
-
+    addresses.click_on_element(AL.locator_show_list_link)
+    addresses.click_on_element(AL.locator_destroy_address_link)
+    popup = addresses.driver.switch_to.alert
+    popup.accept()
+    time.sleep(2)
 
 
 

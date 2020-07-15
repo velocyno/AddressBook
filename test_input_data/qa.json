@@ -1,0 +1,44 @@
+{
+  "session_email": "andrii1@i.ua",
+  "session_password": "123456",
+  "dict_add_address":
+  {
+            'First name:': 'Andrii',
+            'Last name:': 'AQA',
+            'Street Address:': 'Street',
+            'Secondary Address:': 'Street2',
+            'City:': 'Lviv',
+            'State:': 'AK',
+            'Zip code:': '79000',
+            'Country:': 'us',
+            'Birthday:': '6/11/1985',
+            'Color:': "(0, 255, 51)",
+            'Age:': '35',
+            'Website:': 'https://www.site.com',
+            'Phone:': '123456',
+            'Climbing?': 'Yes',
+            'Dancing?': 'Yes',
+            'Reading?': 'Yes',
+            'Note:': 'Test note'
+  },
+  "dict_edit_address":
+          {
+            'First name:': 'Andrii2',
+            'Last name:': 'AQA2',
+            'Street Address:': 'Street2',
+            'Secondary Address:': 'Street22',
+            'City:': 'Lviv2',
+            'State:': 'AZ',
+            'Zip code:': '790002',
+            'Country:': 'canada',
+            'Birthday:': '6/12/1985',
+            'Color:': "(25, 150, 245)",
+            'Age:': '36',
+            'Website:': 'https://www.site2.com',
+            'Phone:': '123-4562',
+            'Climbing?': 'No',
+            'Dancing?': 'No',
+            'Reading?': 'No',
+            'Note:': 'Test note2'
+  }
+}

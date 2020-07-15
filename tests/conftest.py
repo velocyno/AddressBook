@@ -1,4 +1,5 @@
 import pytest
+import json
 from selenium import webdriver
 from webdriverdownloader import ChromeDriverDownloader
 
@@ -34,3 +35,10 @@ def data_fixture():
         'Note:': 'Test note'
     }
     return dict_data
+
+@pytest.fixture
+def data_fixture_js():
+    json_file = open("../test_input_data/qa.json")
+    data_from_file = json.load(json_file)
+    yield data_from_file
+    json_file.close()

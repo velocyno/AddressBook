@@ -27,8 +27,56 @@ dict_data_edit = {
 
 
 class TestManageAddresses:
-    def test_add_address(self, browser_fixture, data_fixture):
-        session_email = "andrii1@i.ua"
+    # def test_add_address(self, browser_fixture, data_fixture):
+    #     session_email = "andrii1@i.ua"
+    #     session_password = "123456"
+    #     page = SignInSearchHelper(browser_fixture)
+    #     common = CommonSearchHelper(browser_fixture)
+    #     addresses = AddressesSearchHelper(browser_fixture)
+    #     converter = Converters()
+    #     page.go_to_sign_in_page()
+    #     page.type_sign_in_email(session_email)
+    #     page.type_sign_in_password(session_password)
+    #     page.click_sign_in_btn()
+    #     common.click_addresses()
+    #     addresses.click_on_element(AL.locator_new_address_link)
+    #     addresses.set_data_to_field(AL.locator_first_name_field, data_fixture["First name:"])
+    #     addresses.set_data_to_field(AL.locator_last_name_field, data_fixture["Last name:"])
+    #     addresses.set_data_to_field(AL.locator_address1_field, data_fixture["Street Address:"])
+    #     addresses.set_data_to_field(AL.locator_address2_field, data_fixture["Secondary Address:"])
+    #     addresses.set_data_to_field(AL.locator_city, data_fixture["City:"])
+    #     addresses.select_dropdown_option(AL.locator_state, data_fixture["State:"])
+    #     addresses.set_data_to_field(AL.locator_zip_code, data_fixture["Zip code:"])
+    #     addresses.select_state(data_fixture["Country:"])
+    #     addresses.set_data_to_field(AL.locator_birthday, converter.date_converter(data_fixture["Birthday:"]))
+    #     addresses.set_data_to_field(AL.locator_color, converter.rgb_to_hex(data_fixture["Color:"]))
+    #     addresses.set_data_to_field(AL.locator_age, data_fixture["Age:"])
+    #     addresses.set_data_to_field(AL.locator_website, data_fixture["Website:"])
+    #     # addresses.find_element_by_locator(AL.locator_picture).send_keys("C:\\123.png")
+    #     addresses.set_data_to_field(AL.locator_phone, data_fixture["Phone:"])
+    #     addresses.click_on_element_if_yes(AL.locator_climbing, data_fixture["Climbing?"])
+    #     addresses.click_on_element_if_yes(AL.locator_dancing, data_fixture["Dancing?"])
+    #     addresses.click_on_element_if_yes(AL.locator_reading, data_fixture["Reading?"])
+    #     addresses.set_data_to_field(AL.locator_note, data_fixture["Note:"])
+    #     addresses.click_on_element(AL.locator_create_update_address_btn)
+    #     dict_results = {}
+    #     results = addresses.find_elements_by_locator(AL.locator_container_options)
+    #     for element in results:
+    #         key = element.find_element_by_xpath('.//span[1]').text
+    #         value = element.find_element_by_xpath('.//span[2]').text
+    #         if key == 'Color:':
+    #             value = element.find_element_by_xpath('.//span[2]')
+    #             value = value.get_attribute('style').split("rgb")[1].rstrip(";")
+    #         dict_results[key] = value
+    #     assert addresses.find_element_by_locator(
+    #         AL.locator_result_container).text.split('\n')[0]\
+    #            == "Address was successfully created."
+    #     assert data_fixture == dict_results
+    #     addresses.click_on_element(AL.locator_list_link)
+
+    def test_add_address(self, browser_fixture, data_fixture_js):
+        session_email = data_fixture_js["session_email"]
+        breakpoint()
         session_password = "123456"
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)

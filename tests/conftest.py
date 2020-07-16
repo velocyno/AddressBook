@@ -7,7 +7,7 @@ from webdriverdownloader import ChromeDriverDownloader
 @pytest.fixture(scope="session")
 def browser_fixture():
     chrome_driver = ChromeDriverDownloader()
-    chrome_driver.download_and_install()
+    chrome_driver.download_and_install("83.0.4103.39")
     driver = webdriver.Chrome(
         executable_path="C:\\Users\\Andrii\\bin\\chromedriver.exe")
     yield driver
@@ -35,6 +35,7 @@ def data_fixture():
         'Note:': 'Test note'
     }
     return dict_data
+
 
 @pytest.fixture
 def data_fixture_js():

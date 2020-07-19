@@ -18,9 +18,9 @@ class TestSignInPage:
         sign_in_page.click_on_sign_up_link()
         assert sign_up_page.sign_up_page_header() == "Sign up"
 
-    def test_sign_in(self, browser_fixture):
-        session_email = "andrii1@i.ua"
-        session_password = "123456"
+    def test_sign_in(self, browser_fixture, data_fixture_js):
+        session_email = data_fixture_js["session_email"]
+        session_password = data_fixture_js["session_password"]
         sign_in_page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         sign_in_page.go_to_sign_in_page()
@@ -30,9 +30,9 @@ class TestSignInPage:
         assert session_email in common.navbar_items()
         common.click_sign_out()
 
-    def test_sign_out(self, browser_fixture):
-        session_email = "andrii1@i.ua"
-        session_password = "123456"
+    def test_sign_out(self, browser_fixture, data_fixture_js):
+        session_email = data_fixture_js["session_email"]
+        session_password = data_fixture_js["session_password"]
         sign_in_page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         sign_in_page.go_to_sign_in_page()

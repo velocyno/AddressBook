@@ -117,7 +117,6 @@ class TestManageAddresses:
             data_fixture_js["dict_add_address"]["Note:"]
         )
 
-        breakpoint()
         addresses.click_on_element(
             AL.locator_create_update_address_btn
         )
@@ -183,92 +182,92 @@ class TestManageAddresses:
 
         addresses.set_data_to_field(
             AL.locator_first_name_field,
-            dict_data_edit["First name:"]
+            data_fixture_js["dict_edit_address"]["First name:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_last_name_field,
-            dict_data_edit["Last name:"]
+            data_fixture_js["dict_edit_address"]["Last name:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_address1_field,
-            dict_data_edit["Street Address:"]
+            data_fixture_js["dict_edit_address"]["Street Address:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_address2_field,
-            dict_data_edit["Secondary Address:"]
+            data_fixture_js["dict_edit_address"]["Secondary Address:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_city,
-            dict_data_edit["City:"]
+            data_fixture_js["dict_edit_address"]["City:"]
         )
 
         addresses.select_dropdown_option(
             AL.locator_state,
-            dict_data_edit["State:"]
+            data_fixture_js["dict_edit_address"]["State:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_zip_code,
-            dict_data_edit["Zip code:"]
+            data_fixture_js["dict_edit_address"]["Zip code:"]
         )
 
         addresses.select_state(
-            dict_data_edit["Country:"]
+            data_fixture_js["dict_edit_address"]["Country:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_birthday,
             converter.date_converter(
-                dict_data_edit["Birthday:"]
+                data_fixture_js["dict_edit_address"]["Birthday:"]
             )
         )
 
         addresses.set_data_to_field(
             AL.locator_color,
             converter.rgb_to_hex(
-                dict_data_edit["Color:"]
+                data_fixture_js["dict_edit_address"]["Color:"]
             )
         )
 
         addresses.set_data_to_field(
             AL.locator_age,
-            dict_data_edit["Age:"]
+            data_fixture_js["dict_edit_address"]["Age:"]
         )
 
         addresses.set_data_to_field(
             AL.locator_website,
-            dict_data_edit["Website:"]
+            data_fixture_js["dict_edit_address"]["Website:"]
         )
 
         # addresses.find_element_by_locator(AL.locator_picture).send_keys("C:\\123.png")
 
         addresses.set_data_to_field(
             AL.locator_phone,
-            dict_data_edit["Phone:"]
+            data_fixture_js["dict_edit_address"]["Phone:"]
         )
 
         addresses.click_on_element_if_yes(
             AL.locator_climbing,
-            dict_data_edit["Climbing?"]
+            data_fixture_js["dict_edit_address"]["Climbing?"]
         )
 
         addresses.click_on_element_if_yes(
             AL.locator_dancing,
-            dict_data_edit["Dancing?"]
+            data_fixture_js["dict_edit_address"]["Dancing?"]
         )
 
         addresses.click_on_element_if_yes(
             AL.locator_reading,
-            dict_data_edit["Reading?"]
+            data_fixture_js["dict_edit_address"]["Reading?"]
         )
 
         addresses.set_data_to_field(
             AL.locator_note,
-            dict_data_edit["Note:"]
+            data_fixture_js["dict_edit_address"]["Note:"]
         )
 
         addresses.click_on_element(
@@ -289,15 +288,15 @@ class TestManageAddresses:
         assert addresses.find_element_by_locator(
             AL.locator_result_container).text.split('\n')[0] \
                == "Address was successfully updated."
-        assert dict_data_edit == dict_results
+        assert data_fixture_js["dict_edit_address"] == dict_results
         addresses.click_on_element(AL.locator_list_link)
-    #
-    # def test_destroy_address(self, browser_fixture):
-    #     addresses = AddressesSearchHelper(browser_fixture)
-    #     addresses.click_on_element(AL.locator_destroy_address_link)
-    #     popup = addresses.driver.switch_to.alert
-    #     popup.accept()
-    #     time.sleep(2)
-    #     assert addresses.find_element_by_locator(
-    #         AL.locator_destroyed_message).text == "Address was successfully destroyed."
+
+    def test_destroy_address(self, browser_fixture):
+        addresses = AddressesSearchHelper(browser_fixture)
+        addresses.click_on_element(AL.locator_destroy_address_link)
+        popup = addresses.driver.switch_to.alert
+        popup.accept()
+        time.sleep(2)
+        assert addresses.find_element_by_locator(
+            AL.locator_destroyed_message).text == "Address was successfully destroyed."
 

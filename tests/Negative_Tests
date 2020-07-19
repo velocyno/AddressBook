@@ -1,5 +1,6 @@
 ##### Sign in #####
 
+
 # The user can't sign in with incorrect email and password
 
 **Steps**
@@ -16,7 +17,9 @@
 - Blank email and valid password
 - Invalid email and password
 
+
 ##### Sign up #####
+
 
 # The user can't sign up with incorrect email and password
 
@@ -35,28 +38,9 @@
 - Email with "@" sign but without domain (e.g. ".com") and valid password
 - Invalid email and password
 
+
 ##### Add new address #####
 
-# The user can't add new address without filled required fields
-
-**Steps**
-- Sign in
-- Go to "Addresses"
-- Click on "New Address"
-- Fill the form with data
-- Click on "Create Address" button
-
-**Expected results**
-- Address is not added
-- Appropriate notification shows
-
-**Permutations**
-- All required fields blank
-- All required fields filled except First name
-- All required fields filled except Last name
-- All required fields filled except Address1
-- All required fields filled except City
-- All required fields filled except Zip code
 
 # The user can't add new address without filled required fields
 

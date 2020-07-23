@@ -40,8 +40,9 @@ class AddressesLocators:
 class AddressesSearchHelper(BasePage):
     def click_on_element(self, locator):
         return self.find_element(
-            locator, time=2)\
-            .click()
+            locator,
+            time=self.light_load_element
+        ).click()
 
     def click_on_element_if_yes(self, locator, option):
         element = self.find_element_by_locator(locator)
@@ -58,29 +59,49 @@ class AddressesSearchHelper(BasePage):
 
     def set_data_to_field(self, field_locator, data):
         return self.find_element(
-            field_locator, time=2)\
-            .send_keys(data)
+            field_locator,
+            time=self.light_load_element
+        ).send_keys(data)
 
     def select_dropdown_option(self, dropdown_locator, value):
-        dropdown = Select(self.find_element(
-            dropdown_locator, time=2))
+        dropdown = Select(
+            self.find_element(
+                dropdown_locator,
+                time=self.light_load_element
+            )
+        )
         return dropdown.select_by_value(value)
 
     def find_element_by_locator(self, locator):
-        return self.find_element(locator, time=2)
+        return self.find_element(
+            locator,
+            time=self.light_load_element
+        )
 
     def find_elements_by_locator(self, locator):
-        return self.find_elements(locator, time=2)
+        return self.find_elements(
+            locator,
+            time=self.light_load_element
+        )
 
     def select_element_by_locator(self, locator):
-        element = Select(self.find_element(locator, time=2))
+        element = Select(
+            self.find_element(
+                locator,
+                time=self.light_load_element
+            )
+        )
         return element
 
     def select_state(self, state):
         if state == "us":
-            self.click_on_element(AddressesLocators.locator_address_country_us)
+            self.click_on_element(
+                AddressesLocators.locator_address_country_us
+            )
         elif state == "canada":
-            self.click_on_element(AddressesLocators.locator_address_country_canada)
+            self.click_on_element(
+                AddressesLocators.locator_address_country_canada
+            )
         else:
             pass
 
@@ -92,7 +113,9 @@ class Converters:
     def hex_to_rgb(self, value):
         value = value.lstrip('#')
         lv = len(value)
-        return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+        return tuple(
+            int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3)
+        )
 
     def rgb_to_hex(self, rgb_str):
         rgb_tuple = self.str_to_tuple(rgb_str)

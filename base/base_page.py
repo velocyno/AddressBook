@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
+    heavy_load_element = 10
+    light_load_element = 2
 
     def __init__(self, driver):
         self.driver = driver

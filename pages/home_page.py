@@ -8,4 +8,6 @@ class HomePageLocators:
 class HomePageSearchHelper(BasePage):
     def home_page_header(self):
         return self.find_element(
-            HomePageLocators.locator_home_page_tittle, time=2).text
+            HomePageLocators.locator_home_page_tittle,
+            time=self.light_load_element
+        ).text

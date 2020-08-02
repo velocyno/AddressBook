@@ -5,65 +5,7 @@ from pages.adresses_object import AddressesSearchHelper
 import pytest
 
 
-class TestSignInNegative:
-    # @pytest.mark.parametrize(
-    #     "test_input,expected",
-    #     [
-    #         (
-    #                 {"email": "",
-    #                  "password": ""
-    #                  },
-    #                 "Bad email or password."
-    #         ),
-    #         (
-    #                 {"email": "mymail@i.ua",
-    #                  "password": "123456"
-    #                  },
-    #                 "Bad email or password.")
-    #     ]
-    # )
-    # def test_sign_in_error_message(
-    #         self,
-    #         browser_fixture,
-    #         test_input,
-    #         expected
-    # ):
-    #     session_email = test_input["email"]
-    #     session_password = test_input["password"]
-    #     sign_in_page = SignInSearchHelper(browser_fixture)
-    #     common = CommonSearchHelper(browser_fixture)
-    #     sign_in_page.go_to_sign_in_page()
-    #     sign_in_page.type_sign_in_email(session_email)
-    #     sign_in_page.type_sign_in_password(session_password)
-    #     sign_in_page.click_sign_in_btn()
-    #     error_message = sign_in_page.error_message()
-    #     assert error_message == expected
-    #     assert session_email not in common.navbar_items()
-    #
-    # @pytest.mark.parametrize(
-    #     "test_input,expected",
-    #     [
-    #         ({"email": "mymaili.ua", "password": "123456"}, "Bad email or password."),
-    #         ({"email": "mymaili@", "password": "123456"}, "Bad email or password.")
-    #     ]
-    # )
-    # def test_sign_in_tooltip(
-    #         self,
-    #         browser_fixture,
-    #         test_input,
-    #         expected
-    # ):
-    #     session_email = test_input["email"]
-    #     session_password = test_input["password"]
-    #     sign_in_page = SignInSearchHelper(browser_fixture)
-    #     common = CommonSearchHelper(browser_fixture)
-    #     sign_in_page.go_to_sign_in_page()
-    #     sign_in_page.type_sign_in_email(session_email)
-    #     sign_in_page.type_sign_in_password(session_password)
-    #     sign_in_page.click_sign_in_btn()
-    #     assert session_email not in common.navbar_items()
-    #
-
+class TestAddAddressNegative:
     @pytest.mark.parametrize(
         "test_input,expected",
         [
@@ -105,7 +47,28 @@ class TestSignInNegative:
                     "\nAddress1 can't be blank"
                     "\nCity can't be blank"
                     "\nZip code can't be blank"
-            )
+            ),
+            (
+                    {"first_name": "Andrii",
+                     "last_name": "M",
+                     "address1": "Street",
+                     "city": "",
+                     "zip_code": ""
+                     },
+                    "2 errors prohibited this address from being saved:"
+                    "\nCity can't be blank"
+                    "\nZip code can't be blank"
+            ),
+            (
+                    {"first_name": "Andrii",
+                     "last_name": "M",
+                     "address1": "Street",
+                     "city": "Lviv",
+                     "zip_code": ""
+                     },
+                    "1 error prohibited this address from being saved:"
+                    "\nZip code can't be blank"
+            ),
         ]
     )
     def test_error_required_fields_blank(

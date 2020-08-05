@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 
 class SignInLocators:
     locator_sign_in_page_tittle = (By.TAG_NAME, "h2")
+    # locator_sign_in_page_tittle = (By.XPATH, "//div[@class='sign-in']")
     locator_sign_in_email_field = (By.ID, "session_email")
     locator_sign_in_pass_field = (By.ID, "session_password")
     locator_sign_in_button = (By.XPATH, '//*[@id="clearance"]/div/div'

@@ -91,7 +91,7 @@ class TestSignInNegative:
     #     assert error_message == expected
     #     assert session_email not in common.navbar_items()
 
-    # @pytest.mark.xfail("test_input,expected=({'email': 'mymail@i', 'password': '123456'}, 'Bad email or password.')")
+    @pytest.mark.xfail
     @pytest.mark.parametrize(
         "test_input,expected",
         [

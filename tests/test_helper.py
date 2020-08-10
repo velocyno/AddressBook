@@ -26,8 +26,6 @@ class TestHelper:
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)
-        # converter = Converters()
-
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
@@ -67,4 +65,49 @@ class TestHelper:
             AL.locator_create_update_address_btn
         )
 
-        common.click_sign_out()
+        addresses.click_on_element(
+            AL.locator_list_link
+        )
+
+        # common.click_sign_out()
+
+    # def add_address(self, browser_fixture, data_fixture_js):
+    #     common = CommonSearchHelper(browser_fixture)
+    #     addresses = AddressesSearchHelper(browser_fixture)
+    #
+    #     common.click_addresses()
+    #
+    #     addresses.click_on_element(
+    #         AL.locator_new_address_link
+    #     )
+    #
+    #     addresses.set_data_to_field(
+    #         AL.locator_first_name_field,
+    #         data_fixture_js["dict_add_address"]["First name:"]
+    #     )
+    #
+    #     addresses.set_data_to_field(
+    #         AL.locator_last_name_field,
+    #         data_fixture_js["dict_add_address"]["Last name:"]
+    #     )
+    #
+    #     addresses.set_data_to_field(
+    #         AL.locator_address1_field,
+    #         data_fixture_js["dict_add_address"]["Street Address:"]
+    #     )
+    #
+    #     addresses.set_data_to_field(
+    #         AL.locator_city,
+    #         data_fixture_js["dict_add_address"]["City:"]
+    #     )
+    #
+    #     addresses.set_data_to_field(
+    #         AL.locator_zip_code,
+    #         data_fixture_js["dict_add_address"]["Zip code:"]
+    #     )
+    #
+    #     addresses.click_on_element(
+    #         AL.locator_create_update_address_btn
+    #     )
+    #
+    #     common.click_sign_out()

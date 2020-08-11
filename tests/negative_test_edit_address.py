@@ -9,6 +9,8 @@ import pytest
 
 
 class TestEditAddressNegative:
+    before_all = False
+
     @pytest.mark.parametrize(
         "test_input,expected",
         [
@@ -87,19 +89,17 @@ class TestEditAddressNegative:
             test_input,
             expected
     ):
-        session_email = data_fixture_js["session_email"]
-        session_password = data_fixture_js["session_password"]
+        if not TestEditAddressNegative.before_all:
+            before_all = TestHelper()
+            before_all.create_user(browser_fixture)
+            before_all.add_address(browser_fixture, data_fixture_js)
+            TestEditAddressNegative.before_all = True
 
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)
-        page.go_to_sign_in_page()
-        page.type_sign_in_email(session_email)
-        page.type_sign_in_password(session_password)
-        page.click_sign_in_btn()
 
-        test_helper = TestHelper()
-        test_helper.add_address(browser_fixture, data_fixture_js)
+        addresses.click_on_element(AL.locator_edit_address_link)
 
         addresses.clean_field(AL.locator_first_name_field)
         addresses.clean_field(AL.locator_last_name_field)
@@ -123,12 +123,12 @@ class TestEditAddressNegative:
         )
 
         addresses.set_data_to_field(
-            AL.locator_address2_field,
+            AL.locator_city,
             test_input["city"]
         )
 
         addresses.set_data_to_field(
-            AL.locator_address2_field,
+            AL.locator_zip_code,
             test_input["zip_code"]
         )
 
@@ -141,3 +141,9 @@ class TestEditAddressNegative:
         )
 
         assert error_message == expected
+
+
+        addresses.click_on_element(
+            AL.locator_list_link
+        )
+

@@ -4,7 +4,7 @@ from pages.common_objects import CommonSearchHelper
 from pages.adresses_object import AddressesLocators as AL
 from pages.adresses_object import AddressesSearchHelper
 from selenium.common.exceptions import TimeoutException
-from tests.test_helper import CreateUser
+from tests.test_helper import TestHelper
 import pytest
 import random
 import string
@@ -61,7 +61,7 @@ class TestSignInNegative:
             expected
     ):
         if not TestSignInNegative.user_created:
-            create_user = CreateUser()
+            create_user = TestHelper()
             create_user.create_user(browser_fixture)
             TestSignInNegative.user_created = True
         session_email = test_input["email"]

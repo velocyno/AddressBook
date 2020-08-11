@@ -1,6 +1,6 @@
 from pages.sign_up_object import SignUpSearchHelper
 from pages.common_objects import CommonSearchHelper
-from tests.test_helper import CreateUser
+from tests.test_helper import TestHelper
 import random
 import string
 import pytest
@@ -52,7 +52,7 @@ class TestSignUpNegative:
             expected
     ):
         if not TestSignUpNegative.user_created:
-            create_user = CreateUser()
+            create_user = TestHelper()
             create_user.create_user(browser_fixture)
             TestSignUpNegative.user_created = True
         sign_up_email = test_input["email"]

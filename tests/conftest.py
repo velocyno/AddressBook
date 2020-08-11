@@ -20,3 +20,10 @@ def data_fixture_js():
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()
+
+
+def pytest_generate_tests(metafunc):
+    if "data_gen" in metafunc.fixturenames:
+        file = open("../test_input_data/qa.json")
+        data = [json.load(file)]
+        metafunc.parametrize("data_gen", data)

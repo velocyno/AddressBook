@@ -20,8 +20,11 @@ class CommonSearchHelper(BasePage):
 
     def click_sign_out(self):
         return self.find_element(
-            NavbarLocators.locator_sign_out_link).click()
+            NavbarLocators.locator_sign_out_link, time=2).click()
 
     def click_addresses(self):
         return self.find_element(
             NavbarLocators.locator_addresses_link, time=2).click()
+
+    def get_text_from_element(self, locator):
+        return self.find_element(locator, time=2).text

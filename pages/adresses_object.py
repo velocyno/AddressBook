@@ -33,8 +33,7 @@ class AddressesLocators:
     locator_result_container = (By.CLASS_NAME, "container")
     locator_container_options = (By.XPATH, "//p")
     locator_destroyed_message = (By.XPATH, "/html/body/div/div")
-    # locator_container_options_key = (By.XPATH, ".//span[1]")
-    # locator_container_options_value = (By.XPATH, ".//span[2]")
+    locator_required_fields_error = (By.XPATH, ".//div[@id = 'error_explanation']")
 
 
 class AddressesSearchHelper(BasePage):

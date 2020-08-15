@@ -16,14 +16,17 @@ def browser_fixture():
 
 @pytest.fixture
 def data_fixture_js():
-    json_file = open("../test_input_data/qa.json")
+    # json_file = open("../test_input_data/qa.json")
+    json_file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()
 
 
+# used in generator tests
 def pytest_generate_tests(metafunc):
     if "data_gen" in metafunc.fixturenames:
-        file = open("../test_input_data/qa.json")
+        # file = open("../test_input_data/qa.json")
+        file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
         data = [json.load(file)]
         metafunc.parametrize("data_gen", data)

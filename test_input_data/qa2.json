@@ -1,0 +1,10 @@
+{
+      "test_input": {
+        "first_name": "",
+        "last_name": "",
+        "address1": "",
+        "city": "",
+        "zip_code": ""
+      },
+      "expected": "5 errors prohibited this address from being saved:\nFirst name can't be blank\nLast name can't be blank\nAddress1 can't be blank\nCity can't be blank\nZip code can't be blank"
+}

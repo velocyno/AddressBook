@@ -11,11 +11,11 @@ class TestAddAddressNegative:
     def test_error_required_fields_blank(
             self,
             browser_fixture,
+            data_fixture_js,
             data_gen
     ):
-        test_data = data_gen['address_negative']
-        session_email = data_gen["session_email"]
-        session_password = data_gen["session_password"]
+        session_email = data_fixture_js["session_email"]
+        session_password = data_fixture_js["session_password"]
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)
@@ -34,27 +34,27 @@ class TestAddAddressNegative:
 
         addresses.set_data_to_field(
             AL.locator_first_name_field,
-            test_data['p1']['test_input']['first_name']
+            data_gen['test_input']['first_name']
         )
 
         addresses.set_data_to_field(
             AL.locator_last_name_field,
-            test_data['p1']['test_input']["last_name"]
+            data_gen['test_input']["last_name"]
         )
 
         addresses.set_data_to_field(
             AL.locator_address1_field,
-            test_data['p1']['test_input']["address1"]
+            data_gen['test_input']["address1"]
         )
 
         addresses.set_data_to_field(
             AL.locator_city,
-            test_data['p1']['test_input']["city"]
+            data_gen['test_input']["city"]
         )
 
         addresses.set_data_to_field(
             AL.locator_zip_code,
-            test_data['p1']['test_input']["zip_code"]
+            data_gen['test_input']["zip_code"]
         )
 
         addresses.click_on_element(
@@ -64,7 +64,7 @@ class TestAddAddressNegative:
         error_message = common.get_text_from_element(
             AL.locator_required_fields_error
         )
-        assert error_message == test_data['p1']["expected"]
+        assert error_message == data_gen["expected"]
         common.click_sign_out()
 
         # What if I have one more permutation here. Can I use PARAMETRIZE here?

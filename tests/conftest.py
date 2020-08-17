@@ -24,21 +24,11 @@ def data_fixture_js():
 
 
 # used in generator tests
-# def pytest_generate_tests(metafunc):
-#     if "data_gen" in metafunc.fixturenames:
-#         # file = open("../test_input_data/qa.json")
-#         file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
-#         data = [json.load(file)]
-#         breakpoint()
-#         metafunc.parametrize("data_gen", data)
-
 def pytest_generate_tests(metafunc):
     if "data_gen" in metafunc.fixturenames:
-        # file = open("../test_input_data/qa.json")
-        file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
+        file = open("C:\\Users\\Andrii\\repositories\\AddressBook"
+                    "\\test_input_data\\qa.json")
         data = [json.load(file)]
-        # file2 = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa3.json")
-        # data2 = [json.load(file2)]
         metafunc.parametrize("data_gen", [
             data[0]["address_negative"]["p1"],
             data[0]["address_negative"]["p2"]

@@ -3,17 +3,30 @@ from pages.common_objects import CommonSearchHelper
 from pages.adresses_object import AddressesLocators as AL
 from pages.adresses_object import AddressesSearchHelper
 import json
-import pytest
+from selenium import webdriver
+from webdriverdownloader import ChromeDriverDownloader
 
 
 class TestAddAddressNegative:
+    @classmethod
+    def setup_class(cls):
+        file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
+        cls.data_gen = [json.load(file)]
+        chrome_driver = ChromeDriverDownloader()
+        driver_path = chrome_driver.download_and_install()
+        cls.driver = webdriver.Chrome(
+            executable_path=driver_path[0])
+        return cls.driver, cls.data_gen
+
+    # @classmethod
+    # def setup_class(cls):
+    #     file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
+    #     cls.data_gen = [json.load(file)]
 
     def test_error_required_fields_blank(
             self,
-            browser_fixture,
-            data_fixture_js,
-            data_gen
     ):
+        breakpoint()
         session_email = data_fixture_js["session_email"]
         session_password = data_fixture_js["session_password"]
         page = SignInSearchHelper(browser_fixture)

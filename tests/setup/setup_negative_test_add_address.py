@@ -12,8 +12,10 @@ class TestAddAddressNegative:
     # Question: Can I use PARAMETRIZE HERE?
     @classmethod
     def setup_class(cls):
-        file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
-        cls.data_gen = [json.load(file)]
+        # file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
+        cls.file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
+        # cls.data_gen = [json.load(file)]
+        cls.data_gen = [json.load(cls.file)]
         chrome_driver = ChromeDriverDownloader()
         driver_path = chrome_driver.download_and_install()
         cls.driver = webdriver.Chrome(
@@ -32,7 +34,9 @@ class TestAddAddressNegative:
 
     @classmethod
     def teardown_class(cls):
+        cls.file.close()
         cls.driver.quit()
+        # Do I need some special clean up here (e.g. Log out, ...)
 
     def test_error_required_fields_blank(
             self,

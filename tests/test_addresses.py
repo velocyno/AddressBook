@@ -160,9 +160,11 @@ class TestManageAddresses:
             pass
         assert data_fixture_js["dict_add_address"] == dict_results
         addresses.click_on_element(AL.locator_list_link)
+        time.sleep(2)
 
     def test_edit_addresses(self, browser_fixture, data_fixture_js):
         addresses = AddressesSearchHelper(browser_fixture)
+
         addresses.click_on_element(
             AL.locator_edit_address_link
         )
@@ -293,10 +295,11 @@ class TestManageAddresses:
 
     def test_destroy_address(self, browser_fixture):
         addresses = AddressesSearchHelper(browser_fixture)
+        common = CommonSearchHelper(browser_fixture)
         addresses.click_on_element(AL.locator_destroy_address_link)
         popup = addresses.driver.switch_to.alert
         popup.accept()
         time.sleep(2)
         assert addresses.find_element_by_locator(
             AL.locator_destroyed_message).text == "Address was successfully destroyed."
-
+        common.click_sign_out()

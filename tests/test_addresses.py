@@ -8,8 +8,11 @@ import time
 
 class TestManageAddresses:
     def test_add_address(self, browser_fixture, data_fixture_js):
-        session_email = data_fixture_js["session_email"]
-        session_password = data_fixture_js["session_password"]
+        # session_email = data_fixture_js["session_email"]
+        # session_password = data_fixture_js["session_password"]
+
+        session_email = "mymail@i.ua"
+        session_password = "123456"
 
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
@@ -142,6 +145,7 @@ class TestManageAddresses:
 
     def test_show_address(self, browser_fixture, data_fixture_js):
         addresses = AddressesSearchHelper(browser_fixture)
+        time.sleep(2)
         addresses.click_on_element(
             AL.locator_show_address_link
         )

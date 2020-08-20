@@ -78,8 +78,8 @@ class TestAddAddressNegative:
             test_input,
             expected
     ):
-        session_email = data_fixture_js["session_email"]
-        session_password = data_fixture_js["session_password"]
+        session_email = data_fixture_js["session_email2"]
+        session_password = data_fixture_js["session_password2"]
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)

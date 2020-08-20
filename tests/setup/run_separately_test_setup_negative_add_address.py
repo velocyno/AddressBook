@@ -12,6 +12,7 @@ class TestAddAddressNegative:
     # Question: Can I use PARAMETRIZE HERE?
     @classmethod
     def setup_class(cls):
+        breakpoint()
         # file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
         cls.file = open("C:\\Users\\Andrii\\repositories\\AddressBook\\test_input_data\\qa.json")
         # cls.data_gen = [json.load(file)]

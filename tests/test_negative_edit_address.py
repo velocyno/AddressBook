@@ -91,11 +91,10 @@ class TestEditAddressNegative:
     ):
         if not TestEditAddressNegative.before_all:
             before_all = TestHelper()
-            before_all.create_user(browser_fixture)
+            # before_all.create_user(browser_fixture)
             before_all.add_address(browser_fixture, data_fixture_js)
             TestEditAddressNegative.before_all = True
 
-        page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)
 
@@ -142,8 +141,6 @@ class TestEditAddressNegative:
 
         assert error_message == expected
 
-
         addresses.click_on_element(
             AL.locator_list_link
         )
-

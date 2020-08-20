@@ -34,6 +34,8 @@ class AddressesLocators:
     locator_container_options = (By.XPATH, "//p")
     locator_destroyed_message = (By.XPATH, "/html/body/div/div")
     locator_required_fields_error = (By.XPATH, ".//div[@id = 'error_explanation']")
+    locator_addresses_table = (By.CLASS_NAME, "table")
+    locator_rows_in_table = (By.XPATH, ".//tr")
 
 
 class AddressesSearchHelper(BasePage):

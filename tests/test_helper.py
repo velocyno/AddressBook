@@ -20,17 +20,17 @@ class TestHelper:
             pass
 
     def add_address(self, browser_fixture, data_fixture_js):
-        session_email = "mymail@i.ua"
-        session_password = "123456"
-
-        page = SignInSearchHelper(browser_fixture)
-        common = CommonSearchHelper(browser_fixture)
+        # session_email = "mymail@i.ua"
+        # session_password = "123456"
+        #
+        # page = SignInSearchHelper(browser_fixture)
+        # common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)
-        page.go_to_sign_in_page()
-        page.type_sign_in_email(session_email)
-        page.type_sign_in_password(session_password)
-        page.click_sign_in_btn()
-        common.click_addresses()
+        # page.go_to_sign_in_page()
+        # page.type_sign_in_email(session_email)
+        # page.type_sign_in_password(session_password)
+        # page.click_sign_in_btn()
+        # common.click_addresses()
 
         addresses.click_on_element(
             AL.locator_new_address_link

@@ -144,8 +144,6 @@ class TestEditAddressNegative:
             AL.locator_required_fields_error
         )
 
-        assert error_message == expected
-
         addresses.click_on_element(AL.locator_list_link)
         addresses.click_on_element(AL.locator_destroy_address_link)
         popup = addresses.driver.switch_to.alert
@@ -153,3 +151,5 @@ class TestEditAddressNegative:
         time.sleep(2)
 
         common.click_sign_out()
+
+        assert error_message == expected

@@ -41,7 +41,7 @@ class AddressesLocators:
 class AddressesSearchHelper(BasePage):
     def click_on_element(self, locator):
         return self.find_element(
-            locator, time=2)\
+            locator)\
             .click()
 
     def click_on_element_if_yes(self, locator, option):

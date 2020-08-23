@@ -41,3 +41,7 @@ class SignInSearchHelper(BasePage):
     def click_on_sign_up_link(self):
         return self.find_element(
             SignInLocators.locator_sign_up_link, time=2).click()
+
+    def go_to_sign_in_page(self):
+        self.driver.get(self.base_url + "sign_in")
+        return self.find_element(SignInLocators.locator_sign_in_page_tittle)

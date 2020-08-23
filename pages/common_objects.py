@@ -1,5 +1,7 @@
 from base.base_page import BasePage
 from selenium.webdriver.common.by import By
+from pages.sign_in_object import SignInLocators
+from pages.adresses_object import AddressesLocators
 
 
 class NavbarLocators:
@@ -18,13 +20,19 @@ class CommonSearchHelper(BasePage):
         return self.find_element(
             NavbarLocators.locator_sign_in_link).click()
 
+    # def click_sign_out(self):
+    #     return self.find_element(
+    #         NavbarLocators.locator_sign_out_link, time=2).click()
+
     def click_sign_out(self):
-        return self.find_element(
+        self.find_element(
             NavbarLocators.locator_sign_out_link, time=2).click()
+        return self.find_element(SignInLocators.locator_sign_in_page_tittle)
 
     def click_addresses(self):
-        return self.find_element(
+        self.find_element(
             NavbarLocators.locator_addresses_link, time=2).click()
+        return self.find_element(AddressesLocators.locator_addresses_page_header)
 
     def get_text_from_element(self, locator):
         return self.find_element(locator, time=2).text

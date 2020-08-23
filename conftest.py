@@ -1,19 +1,42 @@
 import pytest
 import json
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriverdownloader import ChromeDriverDownloader
 import pathlib
 
 
+# @pytest.fixture(scope="session")
+# def browser_fixture():
+#     chrome_driver = ChromeDriverDownloader()
+#     driver_path = chrome_driver.download_and_install()
+#     driver = webdriver.Chrome(
+#         executable_path=driver_path[0])
+#     yield driver
+#     driver.quit()
+
 @pytest.fixture(scope="session")
 def browser_fixture():
-    chrome_driver = ChromeDriverDownloader()
-    driver_path = chrome_driver.download_and_install()
-    driver = webdriver.Chrome(
-        executable_path=driver_path[0])
+    my_desired_capabilities = DesiredCapabilities.CHROME.copy()
+    chrome_options_remote = webdriver.ChromeOptions()
+    chrome_options_remote.add_argument("--start-maximized")
+
+    init_remote_driver = webdriver.Remote(
+        options=chrome_options_remote,
+        command_executor="http://localhost:4444/wd/hub",
+        desired_capabilities=my_desired_capabilities
+    )
+    return init_remote_driver
+
+@pytest.fixture(scope="session")
+def browser_fixture():
+    my_desired_capabilities = DesiredCapabilities.CHROME.copy()
+    driver = webdriver.Remote(
+        command_executor="http://localhost:4444/wd/hub",
+        desired_capabilities=my_desired_capabilities
+    )
     yield driver
     driver.quit()
-
 
 # @pytest.fixture
 # def data_fixture_js():

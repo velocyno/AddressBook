@@ -15,18 +15,18 @@ import pathlib
 #     yield driver
 #     driver.quit()
 
-@pytest.fixture(scope="session")
-def browser_fixture():
-    my_desired_capabilities = DesiredCapabilities.CHROME.copy()
-    chrome_options_remote = webdriver.ChromeOptions()
-    chrome_options_remote.add_argument("--start-maximized")
-
-    init_remote_driver = webdriver.Remote(
-        options=chrome_options_remote,
-        command_executor="http://localhost:4444/wd/hub",
-        desired_capabilities=my_desired_capabilities
-    )
-    return init_remote_driver
+# @pytest.fixture(scope="session")
+# def browser_fixture():
+#     my_desired_capabilities = DesiredCapabilities.CHROME.copy()
+#     chrome_options_remote = webdriver.ChromeOptions()
+#     chrome_options_remote.add_argument("--start-maximized")
+#
+#     init_remote_driver = webdriver.Remote(
+#         options=chrome_options_remote,
+#         command_executor="http://localhost:4444/wd/hub",
+#         desired_capabilities=my_desired_capabilities
+#     )
+#     return init_remote_driver
 
 @pytest.fixture(scope="session")
 def browser_fixture():

@@ -93,6 +93,8 @@ class TestEditAddressNegative:
         common = CommonSearchHelper(browser_fixture)
         addresses = AddressesSearchHelper(browser_fixture)
         page.go_to_sign_in_page()
+        # page.go_to_home_page()
+        # common.click_sign_in()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
         page.click_sign_in_btn()
@@ -105,6 +107,7 @@ class TestEditAddressNegative:
             test_helper.add_address(browser_fixture, data_fixture_js)
 
         addresses.click_on_element(AL.locator_edit_address_link)
+
         addresses.clean_field(AL.locator_first_name_field)
         addresses.clean_field(AL.locator_last_name_field)
         addresses.clean_field(AL.locator_address1_field)
@@ -136,6 +139,7 @@ class TestEditAddressNegative:
             test_input["zip_code"]
         )
 
+
         addresses.click_on_element(
             AL.locator_create_update_address_btn
         )
@@ -143,6 +147,7 @@ class TestEditAddressNegative:
         error_message = common.get_text_from_element(
             AL.locator_required_fields_error
         )
+
 
         addresses.click_on_element(AL.locator_list_link)
         addresses.click_on_element(AL.locator_destroy_address_link)

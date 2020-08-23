@@ -69,6 +69,8 @@ class TestHelper:
             AL.locator_list_link
         )
 
+        addresses.find_element(AL.locator_addresses_page_header)
+
         # common.click_sign_out()
 
     # def add_address(self, browser_fixture, data_fixture_js):

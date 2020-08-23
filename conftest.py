@@ -48,7 +48,8 @@ def browser_fixture():
 @pytest.fixture
 def data_fixture_js():
     cur_path = pathlib.Path(__file__).parent
-    json_file = open(f'{cur_path}\\test_input_data\\qa.json')
+    # json_file = open(f'{cur_path}\\test_input_data\\qa.json')
+    json_file = open(f'{cur_path}/test_input_data/qa.json')
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()

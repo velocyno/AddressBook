@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import Select
 
 
 class AddressesLocators:
+    locator_addresses_page_header = (By.TAG_NAME, "h2")
     locator_new_address_link = (By.LINK_TEXT, "New Address")
     locator_list_link = (By.LINK_TEXT, "List")
     locator_show_address_link = (By.LINK_TEXT, "Show")

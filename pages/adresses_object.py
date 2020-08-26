@@ -37,13 +37,13 @@ class AddressesLocators:
 
 
 class AddressesSearchHelper(BasePage):
-    def click_on_element(self, locator):
-        return self.find_element(
-            locator, time=2)\
-            .click()
+    # def click_on_element(self, locator):
+    #     return self.find_element(
+    #         locator, time=2)\
+    #         .click()
 
     def click_on_element_if_yes(self, locator, option):
-        element = self.find_element_by_locator(locator)
+        element = self.find_element(locator)
         if option == 'Yes':
             return element.click()
         elif option == 'No':
@@ -65,11 +65,11 @@ class AddressesSearchHelper(BasePage):
             dropdown_locator, time=2))
         return dropdown.select_by_value(value)
 
-    def find_element_by_locator(self, locator):
-        return self.find_element(locator, time=2)
-
-    def find_elements_by_locator(self, locator):
-        return self.find_elements(locator, time=2)
+    # def find_element_by_locator(self, locator):
+    #     return self.find_element(locator, time=2)
+    #
+    # def find_elements_by_locator(self, locator):
+    #     return self.find_elements(locator, time=2)
 
     def select_element_by_locator(self, locator):
         element = Select(self.find_element(locator, time=2))
@@ -84,7 +84,7 @@ class AddressesSearchHelper(BasePage):
             pass
 
     def clean_field(self, locator):
-        return self.find_element_by_locator(locator).clear()
+        return self.find_element(locator).clear()
 
 
 class Converters:

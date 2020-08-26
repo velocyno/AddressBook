@@ -8,11 +8,8 @@ import time
 
 class TestManageAddresses:
     def test_add_address(self, browser_fixture, data_fixture_js):
-        # session_email = data_fixture_js["session_email"]
-        # session_password = data_fixture_js["session_password"]
-
-        session_email = "mymail@i.ua"
-        session_password = "123456"
+        session_email = data_fixture_js["session_email2"]
+        session_password = data_fixture_js["session_password2"]
 
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
@@ -92,7 +89,7 @@ class TestManageAddresses:
             data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        addresses.find_element_by_locator(AL.locator_picture)\
+        addresses.find_element(AL.locator_picture)\
             .send_keys("C:\\123.png")
 
         addresses.set_data_to_field(
@@ -126,7 +123,7 @@ class TestManageAddresses:
 
         dict_results = {}
 
-        results = addresses.find_elements_by_locator(
+        results = addresses.find_elements(
             AL.locator_container_options
         )
 
@@ -137,7 +134,7 @@ class TestManageAddresses:
                 value = element.find_element_by_xpath('.//span[2]')
                 value = value.get_attribute('style').split("rgb")[1].rstrip(";")
             dict_results[key] = value
-        assert addresses.find_element_by_locator(
+        assert addresses.find_element(
             AL.locator_result_container).text.split('\n')[0]\
                == "Address was successfully created."
         assert data_fixture_js["dict_add_address"] == dict_results
@@ -151,7 +148,7 @@ class TestManageAddresses:
         )
         time.sleep(2)
         dict_results = {}
-        results = addresses.find_elements_by_locator(
+        results = addresses.find_elements(
             AL.locator_container_options
         )
         for element in results:
@@ -281,7 +278,7 @@ class TestManageAddresses:
         )
 
         dict_results = {}
-        results = addresses.find_elements_by_locator(
+        results = addresses.find_elements(
             AL.locator_container_options
         )
         for element in results:
@@ -291,7 +288,7 @@ class TestManageAddresses:
                 value = element.find_element_by_xpath('.//span[2]')
                 value = value.get_attribute('style').split("rgb")[1].rstrip(";")
             dict_results[key] = value
-        assert addresses.find_element_by_locator(
+        assert addresses.find_element(
             AL.locator_result_container).text.split('\n')[0] \
                == "Address was successfully updated."
         assert data_fixture_js["dict_edit_address"] == dict_results
@@ -304,6 +301,6 @@ class TestManageAddresses:
         popup = addresses.driver.switch_to.alert
         popup.accept()
         time.sleep(2)
-        assert addresses.find_element_by_locator(
+        assert addresses.find_element(
             AL.locator_destroyed_message).text == "Address was successfully destroyed."
         common.click_sign_out()

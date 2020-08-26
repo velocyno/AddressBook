@@ -18,6 +18,9 @@ class BasePage:
             .until(EC.presence_of_all_elements_located(locator),
                    message=f"Can't find elements by locator {locator}")
 
+    def click_on_element(self, locator):
+        return self.find_element(locator).click()
+
     def go_to_home_page(self):
         return self.driver.get(self.base_url)
 

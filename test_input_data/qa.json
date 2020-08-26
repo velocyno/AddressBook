@@ -1,6 +1,8 @@
 {
   "session_email": "andrii1@i.ua",
   "session_password": "123456",
+  "session_email2": "mymail@i.ua",
+  "session_password2": "123456",
   "dict_add_address": {
     "First name:": "Andrii",
     "Last name:": "AQA",

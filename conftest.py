@@ -15,13 +15,6 @@ def browser_fixture():
     driver.quit()
 
 
-# @pytest.fixture
-# def data_fixture_js():
-#     json_file = open("../test_input_data/qa.json")
-#     data_from_file = json.load(json_file)
-#     yield data_from_file
-#     json_file.close()
-
 @pytest.fixture
 def data_fixture_js():
     cur_path = pathlib.Path(__file__).parent
@@ -31,11 +24,9 @@ def data_fixture_js():
     json_file.close()
 
 
-# used in generator tests
 def pytest_generate_tests(metafunc):
     if "data_gen" in metafunc.fixturenames:
         cur_path = pathlib.Path(__file__).parent
-        # file = open("../test_input_data/qa.json")
         file = open(f'{cur_path}\\test_input_data\\qa.json')
         data = [json.load(file)]
         metafunc.parametrize("data_gen", [

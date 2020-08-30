@@ -1,8 +1,14 @@
 from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
-from pages.adresses_object import AddressesLocators as AL
-from pages.adresses_object import AddressesSearchHelper
-from pages.adresses_object import Converters
+from pages.addresses_list_object import AddressesListLocators as ALL
+from pages.addresses_list_object import AddressesListPage
+from pages.new_address_object import NewAddressLocators as NAL
+from pages.new_address_object import NewAddressPage
+from pages.show_address_object import ShowAddressesLocators as SAL
+from pages.show_address_object import ShowAddressPage
+from pages.edit_address_object import EditAddressesLocators as EAL
+from pages.edit_address_object import EditAddressPage
+from pages.new_address_object import Converters
 import time
 
 
@@ -13,7 +19,9 @@ class TestManageAddresses:
 
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
-        addresses = AddressesSearchHelper(browser_fixture)
+        addresses_list_page = AddressesListPage(browser_fixture)
+        new_address_page = NewAddressPage(browser_fixture)
+        show_address_page = ShowAddressPage(browser_fixture)
         converter = Converters()
 
         page.go_to_sign_in_page()
@@ -22,109 +30,109 @@ class TestManageAddresses:
         page.click_sign_in_btn()
         common.click_addresses()
 
-        addresses.click_on_element(
-            AL.locator_new_address_link
+        addresses_list_page.click_on_element(
+            ALL.locator_new_address_link
         )
 
-        addresses.set_data_to_field(
-            AL.locator_first_name_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_first_name_field,
             data_fixture_js["dict_add_address"]["First name:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_last_name_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_last_name_field,
             data_fixture_js["dict_add_address"]["Last name:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_address1_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_address1_field,
             data_fixture_js["dict_add_address"]["Street Address:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_address2_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_address2_field,
             data_fixture_js["dict_add_address"]["Secondary Address:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_city,
+        new_address_page.set_data_to_field(
+            NAL.locator_city,
             data_fixture_js["dict_add_address"]["City:"]
         )
 
-        addresses.select_dropdown_option(
-            AL.locator_state,
+        new_address_page.select_dropdown_option(
+            NAL.locator_state,
             data_fixture_js["dict_add_address"]["State:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_zip_code,
+        new_address_page.set_data_to_field(
+            NAL.locator_zip_code,
             data_fixture_js["dict_add_address"]["Zip code:"]
         )
 
-        addresses.select_state(
+        new_address_page.select_state(
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_birthday,
+        new_address_page.set_data_to_field(
+            NAL.locator_birthday,
             converter.date_converter(
                 data_fixture_js["dict_add_address"]["Birthday:"]
             )
         )
 
-        addresses.set_data_to_field(
-            AL.locator_color,
+        new_address_page.set_data_to_field(
+            NAL.locator_color,
             converter.rgb_to_hex(
                 data_fixture_js["dict_add_address"]["Color:"]
             )
         )
 
-        addresses.set_data_to_field(
-            AL.locator_age,
+        new_address_page.set_data_to_field(
+            NAL.locator_age,
             data_fixture_js["dict_add_address"]["Age:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_website,
+        new_address_page.set_data_to_field(
+            NAL.locator_website,
             data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        addresses.find_element(AL.locator_picture)\
+        new_address_page.find_element(NAL.locator_picture)\
             .send_keys("C:\\123.png")
 
-        addresses.set_data_to_field(
-            AL.locator_phone,
+        new_address_page.set_data_to_field(
+            NAL.locator_phone,
             data_fixture_js["dict_add_address"]["Phone:"]
         )
 
-        addresses.click_on_element_if_yes(
-            AL.locator_climbing,
+        new_address_page.click_on_element_if_yes(
+            NAL.locator_climbing,
             data_fixture_js["dict_add_address"]["Climbing?"]
         )
 
-        addresses.click_on_element_if_yes(
-            AL.locator_dancing,
+        new_address_page.click_on_element_if_yes(
+            NAL.locator_dancing,
             data_fixture_js["dict_add_address"]["Dancing?"]
         )
 
-        addresses.click_on_element_if_yes(
-            AL.locator_reading,
+        new_address_page.click_on_element_if_yes(
+            NAL.locator_reading,
             data_fixture_js["dict_add_address"]["Reading?"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_note,
+        new_address_page.set_data_to_field(
+            NAL.locator_note,
             data_fixture_js["dict_add_address"]["Note:"]
         )
 
-        addresses.click_on_element(
-            AL.locator_create_update_address_btn
+        new_address_page.click_on_element(
+            NAL.locator_create_address_btn
         )
 
         dict_results = {}
 
-        results = addresses.find_elements(
-            AL.locator_container_options
+        results = show_address_page.find_elements(
+            SAL.locator_container_options
         )
 
         for element in results:
@@ -134,22 +142,23 @@ class TestManageAddresses:
                 value = element.find_element_by_xpath('.//span[2]')
                 value = value.get_attribute('style').split("rgb")[1].rstrip(";")
             dict_results[key] = value
-        assert addresses.find_element(
-            AL.locator_result_container).text.split('\n')[0]\
+        assert show_address_page.find_element(
+            SAL.locator_result_container).text.split('\n')[0]\
                == "Address was successfully created."
         assert data_fixture_js["dict_add_address"] == dict_results
-        addresses.click_on_element(AL.locator_list_link)
+        show_address_page.click_on_element(SAL.locator_list_link)
 
     def test_show_address(self, browser_fixture, data_fixture_js):
-        addresses = AddressesSearchHelper(browser_fixture)
-        time.sleep(2)
-        addresses.click_on_element(
-            AL.locator_show_address_link
+        addresses_list_page = AddressesListPage(browser_fixture)
+        show_address_page = ShowAddressPage(browser_fixture)
+        # time.sleep(2)
+        addresses_list_page.click_on_element(
+            ALL.locator_show_address_link
         )
-        time.sleep(2)
+        # time.sleep(2)
         dict_results = {}
-        results = addresses.find_elements(
-            AL.locator_container_options
+        results = show_address_page.find_elements(
+            SAL.locator_container_options
         )
         for element in results:
             key = element.find_element_by_xpath('.//span[1]').text
@@ -160,126 +169,128 @@ class TestManageAddresses:
             dict_results[key] = value
             pass
         assert data_fixture_js["dict_add_address"] == dict_results
-        addresses.click_on_element(AL.locator_list_link)
+        show_address_page.click_on_element(SAL.locator_list_link)
         time.sleep(2)
 
     def test_edit_addresses(self, browser_fixture, data_fixture_js):
-        addresses = AddressesSearchHelper(browser_fixture)
+        addresses_list_page = AddressesListPage(browser_fixture)
+        edit_address_page = EditAddressPage(browser_fixture)
+        show_address_page = ShowAddressPage(browser_fixture)
 
-        addresses.click_on_element(
-            AL.locator_edit_address_link
+        addresses_list_page.click_on_element(
+            ALL.locator_edit_address_link
         )
 
         converter = Converters()
 
-        addresses.clean_field(AL.locator_first_name_field)
-        addresses.clean_field(AL.locator_last_name_field)
-        addresses.clean_field(AL.locator_address1_field)
-        addresses.clean_field(AL.locator_address2_field)
-        addresses.clean_field(AL.locator_city)
-        addresses.clean_field(AL.locator_zip_code)
-        addresses.clean_field(AL.locator_age)
-        addresses.clean_field(AL.locator_website)
-        addresses.clean_field(AL.locator_phone)
-        addresses.clean_field(AL.locator_note)
+        edit_address_page.clean_field(EAL.locator_first_name_field)
+        edit_address_page.clean_field(EAL.locator_last_name_field)
+        edit_address_page.clean_field(EAL.locator_address1_field)
+        edit_address_page.clean_field(EAL.locator_address2_field)
+        edit_address_page.clean_field(EAL.locator_city)
+        edit_address_page.clean_field(EAL.locator_zip_code)
+        edit_address_page.clean_field(EAL.locator_age)
+        edit_address_page.clean_field(EAL.locator_website)
+        edit_address_page.clean_field(EAL.locator_phone)
+        edit_address_page.clean_field(EAL.locator_note)
 
-        addresses.set_data_to_field(
-            AL.locator_first_name_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_first_name_field,
             data_fixture_js["dict_edit_address"]["First name:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_last_name_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_last_name_field,
             data_fixture_js["dict_edit_address"]["Last name:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_address1_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_address1_field,
             data_fixture_js["dict_edit_address"]["Street Address:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_address2_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_address2_field,
             data_fixture_js["dict_edit_address"]["Secondary Address:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_city,
+        edit_address_page.set_data_to_field(
+            EAL.locator_city,
             data_fixture_js["dict_edit_address"]["City:"]
         )
 
-        addresses.select_dropdown_option(
-            AL.locator_state,
+        edit_address_page.select_dropdown_option(
+            EAL.locator_state,
             data_fixture_js["dict_edit_address"]["State:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_zip_code,
+        edit_address_page.set_data_to_field(
+            EAL.locator_zip_code,
             data_fixture_js["dict_edit_address"]["Zip code:"]
         )
 
-        addresses.select_state(
+        edit_address_page.select_state(
             data_fixture_js["dict_edit_address"]["Country:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_birthday,
+        edit_address_page.set_data_to_field(
+            EAL.locator_birthday,
             converter.date_converter(
                 data_fixture_js["dict_edit_address"]["Birthday:"]
             )
         )
 
-        addresses.set_data_to_field(
-            AL.locator_color,
+        edit_address_page.set_data_to_field(
+            EAL.locator_color,
             converter.rgb_to_hex(
                 data_fixture_js["dict_edit_address"]["Color:"]
             )
         )
 
-        addresses.set_data_to_field(
-            AL.locator_age,
+        edit_address_page.set_data_to_field(
+            EAL.locator_age,
             data_fixture_js["dict_edit_address"]["Age:"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_website,
+        edit_address_page.set_data_to_field(
+            EAL.locator_website,
             data_fixture_js["dict_edit_address"]["Website:"]
         )
 
         # addresses.find_element_by_locator(AL.locator_picture).send_keys("C:\\123.png")
 
-        addresses.set_data_to_field(
-            AL.locator_phone,
+        edit_address_page.set_data_to_field(
+            EAL.locator_phone,
             data_fixture_js["dict_edit_address"]["Phone:"]
         )
 
-        addresses.click_on_element_if_yes(
-            AL.locator_climbing,
+        edit_address_page.click_on_element_if_yes(
+            EAL.locator_climbing,
             data_fixture_js["dict_edit_address"]["Climbing?"]
         )
 
-        addresses.click_on_element_if_yes(
-            AL.locator_dancing,
+        edit_address_page.click_on_element_if_yes(
+            EAL.locator_dancing,
             data_fixture_js["dict_edit_address"]["Dancing?"]
         )
 
-        addresses.click_on_element_if_yes(
-            AL.locator_reading,
+        edit_address_page.click_on_element_if_yes(
+            EAL.locator_reading,
             data_fixture_js["dict_edit_address"]["Reading?"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_note,
+        edit_address_page.set_data_to_field(
+            EAL.locator_note,
             data_fixture_js["dict_edit_address"]["Note:"]
         )
 
-        addresses.click_on_element(
-            AL.locator_create_update_address_btn
+        edit_address_page.click_on_element(
+            EAL.locator_update_address_btn
         )
 
         dict_results = {}
-        results = addresses.find_elements(
-            AL.locator_container_options
+        results = show_address_page.find_elements(
+            SAL.locator_container_options
         )
         for element in results:
             key = element.find_element_by_xpath('.//span[1]').text
@@ -288,19 +299,21 @@ class TestManageAddresses:
                 value = element.find_element_by_xpath('.//span[2]')
                 value = value.get_attribute('style').split("rgb")[1].rstrip(";")
             dict_results[key] = value
-        assert addresses.find_element(
-            AL.locator_result_container).text.split('\n')[0] \
+        assert show_address_page.find_element(
+            SAL.locator_result_container).text.split('\n')[0] \
                == "Address was successfully updated."
         assert data_fixture_js["dict_edit_address"] == dict_results
-        addresses.click_on_element(AL.locator_list_link)
+        show_address_page.click_on_element(SAL.locator_list_link)
+
+        # breakpoint()
 
     def test_destroy_address(self, browser_fixture):
-        addresses = AddressesSearchHelper(browser_fixture)
+        addresses_list_page = AddressesListPage(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
-        addresses.click_on_element(AL.locator_destroy_address_link)
-        popup = addresses.driver.switch_to.alert
+        addresses_list_page.click_on_element(ALL.locator_destroy_address_link)
+        popup = addresses_list_page.driver.switch_to.alert
         popup.accept()
         time.sleep(2)
-        assert addresses.find_element(
-            AL.locator_destroyed_message).text == "Address was successfully destroyed."
+        assert addresses_list_page.find_element(
+            ALL.locator_destroyed_message).text == "Address was successfully destroyed."
         common.click_sign_out()

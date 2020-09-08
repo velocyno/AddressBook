@@ -37,7 +37,16 @@ class ShowAddressesLocators:
 
 
 class ShowAddressPage(BasePage):
-    pass
+    def click_list_link(self):
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "List"),
+            "List"
+        )
+
+        list_link = self.driver.find_element(
+            By.LINK_TEXT, "List"
+        )
+        return list_link.click()
 
     # def click_on_element_if_yes(self, locator, option):
     #     element = self.find_element(locator)

@@ -76,6 +76,10 @@ class NewAddressPage(BasePage):
     def clean_field(self, locator):
         return self.find_element(locator).clear()
 
+    def click_list_link(self):
+        pass
+
+
 
 class Converters:
     def hex_to_rgb(self, value):

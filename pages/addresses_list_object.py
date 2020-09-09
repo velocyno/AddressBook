@@ -12,4 +12,35 @@ class AddressesListLocators:
 
 
 class AddressesListPage(BasePage):
-    pass
+    def click_new_address_link(self):
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "New Address"),
+            "New Address"
+        )
+
+        new_address_link = self.driver.find_element(
+            By.LINK_TEXT, "New Address"
+        )
+
+        new_address_link.click()
+
+        self.wait_until_text_in_element(
+            (By.TAG_NAME, "h2"),
+            "New Address"
+        )
+
+    def click_show_address_link(self):
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "Show"),
+            "Show"
+        )
+
+        show_link = self.driver.find_element(
+            By.LINK_TEXT, "Show"
+        )
+
+        show_link.click()
+
+        self.wait_until_visible(
+            (By.CLASS_NAME, "container")
+        )

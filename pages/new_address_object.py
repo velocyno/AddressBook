@@ -79,6 +79,19 @@ class NewAddressPage(BasePage):
     def click_list_link(self):
         pass
 
+    def click_create_address_btn(self):
+        self.wait_until_element_clickable(
+            (By.NAME, "commit")
+        )
+
+        create_address_btn = self.driver.find_element(
+            By.NAME, "commit"
+        )
+
+        create_address_btn.click()
+
+
+
 
 
 class Converters:

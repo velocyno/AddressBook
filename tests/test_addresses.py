@@ -174,9 +174,7 @@ class TestShowAddress:
         page.click_sign_in_btn()
         common.click_addresses()
 
-        addresses_list_page.click_on_element(
-            ALL.locator_new_address_link
-        )
+        addresses_list_page.click_new_address_link()
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
@@ -269,20 +267,24 @@ class TestShowAddress:
             data_fixture_js["dict_add_address"]["Note:"]
         )
 
-        new_address_page.click_on_element(
-            NAL.locator_create_address_btn
-        )
+        # new_address_page.click_on_element(
+        #     NAL.locator_create_address_btn
+        # )
+
+        new_address_page.click_create_address_btn()
 
         show_address_page.click_list_link()
 
-        breakpoint()
+        # breakpoint()
 
         # ----------------------------------------------
 
 
-        addresses_list_page.click_on_element(
-            ALL.locator_show_address_link
-        )
+        # addresses_list_page.click_on_element(
+        #     ALL.locator_show_address_link
+        # )
+
+        addresses_list_page.click_show_address_link()
 
         dict_results = {}
         results = show_address_page.find_elements(
@@ -295,7 +297,8 @@ class TestShowAddress:
                 value = element.find_element_by_xpath('.//span[2]')
                 value = value.get_attribute('style').split("rgb")[1].rstrip(";")
             dict_results[key] = value
-            pass
+            # pass
+        breakpoint()
         assert data_fixture_js["dict_add_address"] == dict_results
         show_address_page.click_on_element(SAL.locator_list_link)
         addresses_list_page = AddressesListPage(browser_fixture)

@@ -46,7 +46,15 @@ class ShowAddressPage(BasePage):
         list_link = self.driver.find_element(
             By.LINK_TEXT, "List"
         )
-        return list_link.click()
+
+        list_link.click()
+
+        self.wait_until_text_in_element(
+            (By.TAG_NAME, "h2"),
+            "Addresses"
+        )
+
+
 
     # def click_on_element_if_yes(self, locator, option):
     #     element = self.find_element(locator)

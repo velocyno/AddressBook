@@ -33,6 +33,14 @@ class BasePage:
             .until(EC.element_to_be_clickable(locator),
                    message=f"Locator {locator} is not clickable")
 
+    def wait_until_alert_appear(self, time=10):
+        return WebDriverWait(self.driver, time)\
+            .until(EC.alert_is_present(),
+                   message="Alert is not present")
+
+    def wait_until_alert_disappear(self, time=10):
+        return WebDriverWait(self.driver, time).until_not(EC.alert_is_present())
+
     def click_on_element(self, locator):
         return self.find_element(locator).click()
 

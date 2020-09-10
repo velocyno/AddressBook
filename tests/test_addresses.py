@@ -297,15 +297,15 @@ class TestShowAddress:
                 value = element.find_element_by_xpath('.//span[2]')
                 value = value.get_attribute('style').split("rgb")[1].rstrip(";")
             dict_results[key] = value
-            # pass
-        breakpoint()
         assert data_fixture_js["dict_add_address"] == dict_results
-        show_address_page.click_on_element(SAL.locator_list_link)
-        addresses_list_page = AddressesListPage(browser_fixture)
-        addresses_list_page.click_on_element(ALL.locator_destroy_address_link)
-        popup = addresses_list_page.driver.switch_to.alert
-        popup.accept()
-        time.sleep(2)
+        show_address_page.click_list_link()
+        # addresses_list_page.click_on_element(ALL.locator_destroy_address_link)
+        addresses_list_page.click_destroy_link()
+        # breakpoint()
+        # popup = addresses_list_page.driver.switch_to.alert
+        addresses_list_page.click_ok_on_alert()
+        # popup.accept()
+        # time.sleep(2)
 
 
     # def test_edit_addresses(self, browser_fixture, data_fixture_js):

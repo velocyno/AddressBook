@@ -44,3 +44,24 @@ class AddressesListPage(BasePage):
         self.wait_until_visible(
             (By.CLASS_NAME, "container")
         )
+
+    def click_destroy_link(self):
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "Destroy"),
+            "Destroy"
+        )
+
+        destroy_link = self.driver.find_element(
+            By.LINK_TEXT, "Destroy"
+        )
+
+        return destroy_link.click()
+        # breakpoint()
+
+        # self.wait_until_alert_appear()
+
+    def click_ok_on_alert(self):
+        self.wait_until_alert_appear()
+        popup = self.driver.switch_to.alert
+        popup.accept()
+        self.wait_until_alert_disappear()

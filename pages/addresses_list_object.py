@@ -41,11 +41,20 @@ class AddressesListPage(BasePage):
 
         show_link.click()
 
-        self.wait_until_visible(
-            (By.CLASS_NAME, "container")
+        # self.wait_until_visible(
+        #     (By.CLASS_NAME, "container")
+        # )
+
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "List"),
+            "List"
         )
 
     def click_destroy_link(self):
+        self.find_elements(
+            (By.XPATH, "//tr")
+        )
+
         self.wait_until_text_in_element(
             (By.LINK_TEXT, "Destroy"),
             "Destroy"
@@ -56,12 +65,21 @@ class AddressesListPage(BasePage):
         )
 
         return destroy_link.click()
-        # breakpoint()
-
-        # self.wait_until_alert_appear()
 
     def click_ok_on_alert(self):
         self.wait_until_alert_appear()
+
         popup = self.driver.switch_to.alert
+
         popup.accept()
+
         self.wait_until_alert_disappear()
+
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "New Address"),
+            "New Address"
+        )
+
+        self.wait_until_visible(
+            (By.CLASS_NAME, "table")
+        )

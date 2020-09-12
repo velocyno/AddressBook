@@ -267,47 +267,25 @@ class TestShowAddress:
             data_fixture_js["dict_add_address"]["Note:"]
         )
 
-        # new_address_page.click_on_element(
-        #     NAL.locator_create_address_btn
-        # )
-
         new_address_page.click_create_address_btn()
 
         show_address_page.click_list_link()
 
-        # breakpoint()
-
-        # ----------------------------------------------
-
-
-        # addresses_list_page.click_on_element(
-        #     ALL.locator_show_address_link
-        # )
-
         addresses_list_page.click_show_address_link()
 
-        # dict_results = {}
-        # results = show_address_page.find_elements(
-        #     SAL.locator_container_options
-        # )
-        # for element in results:
-        #     key = element.find_element_by_xpath('.//span[1]').text
-        #     value = element.find_element_by_xpath('.//span[2]').text
-        #     if key == 'Color:':
-        #         value = element.find_element_by_xpath('.//span[2]')
-        #         value = value.get_attribute('style').split("rgb")[1].rstrip(";")
-        #     dict_results[key] = value
         dict_results = show_address_page.get_results_shown()
-        # breakpoint()
+
         assert data_fixture_js["dict_add_address"] == dict_results
+
         show_address_page.click_list_link()
-        # addresses_list_page.click_on_element(ALL.locator_destroy_address_link)
+
         addresses_list_page.click_destroy_link()
-        # breakpoint()
-        # popup = addresses_list_page.driver.switch_to.alert
+
         addresses_list_page.click_ok_on_alert()
-        # popup.accept()
-        # time.sleep(2)
+
+        breakpoint()
+
+        addresses_list_page.click_new_address_link()
 
 
     # def test_edit_addresses(self, browser_fixture, data_fixture_js):

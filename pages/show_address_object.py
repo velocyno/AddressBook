@@ -54,6 +54,30 @@ class ShowAddressPage(BasePage):
             "Addresses"
         )
 
+    def get_results_shown(self):
+        dict_results = {}
+        # results = show_address_page.find_elements(
+        #     SAL.locator_container_options
+        # )
+        # breakpoint()
+        results = self.driver.find_elements(By.XPATH, "//p")
+        for element in results:
+            # key = element.find_element_by_xpath('.//span[1]').text
+            # value = element.find_element_by_xpath('.//span[2]').text
+            # if key == 'Color:':
+            #     value = element.find_element_by_xpath('.//span[2]')
+            #     value = value.get_attribute('style').split("rgb")[1].rstrip(";")
+            key = element.find_element_by_xpath('.//span[1]').text
+            value = element.find_element_by_xpath('.//span[2]').text
+            if key == 'Color:':
+                value = element.find_element_by_xpath('.//span[2]')
+                value = value.get_attribute('style').split("rgb")[1].rstrip(";")
+            breakpoint()
+            dict_results[key] = value
+            breakpoint()
+
+        return dict_results
+
 
 
     # def click_on_element_if_yes(self, locator, option):

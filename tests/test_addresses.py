@@ -286,17 +286,19 @@ class TestShowAddress:
 
         addresses_list_page.click_show_address_link()
 
-        dict_results = {}
-        results = show_address_page.find_elements(
-            SAL.locator_container_options
-        )
-        for element in results:
-            key = element.find_element_by_xpath('.//span[1]').text
-            value = element.find_element_by_xpath('.//span[2]').text
-            if key == 'Color:':
-                value = element.find_element_by_xpath('.//span[2]')
-                value = value.get_attribute('style').split("rgb")[1].rstrip(";")
-            dict_results[key] = value
+        # dict_results = {}
+        # results = show_address_page.find_elements(
+        #     SAL.locator_container_options
+        # )
+        # for element in results:
+        #     key = element.find_element_by_xpath('.//span[1]').text
+        #     value = element.find_element_by_xpath('.//span[2]').text
+        #     if key == 'Color:':
+        #         value = element.find_element_by_xpath('.//span[2]')
+        #         value = value.get_attribute('style').split("rgb")[1].rstrip(";")
+        #     dict_results[key] = value
+        dict_results = show_address_page.get_results_shown()
+        # breakpoint()
         assert data_fixture_js["dict_add_address"] == dict_results
         show_address_page.click_list_link()
         # addresses_list_page.click_on_element(ALL.locator_destroy_address_link)

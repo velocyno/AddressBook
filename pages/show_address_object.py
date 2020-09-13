@@ -22,9 +22,8 @@ class ShowAddressPage(BasePage):
 
         list_link.click()
 
-        self.wait_until_text_in_element(
+        self.find_element(
             (By.TAG_NAME, "h2"),
-            "Addresses"
         )
 
     def get_results_shown(self):

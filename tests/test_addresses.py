@@ -275,15 +275,15 @@ class TestShowAddress:
 
         dict_results = show_address_page.get_results_shown()
 
+
         assert data_fixture_js["dict_add_address"] == dict_results
 
         show_address_page.click_list_link()
 
+        breakpoint()
         addresses_list_page.click_destroy_link()
 
         addresses_list_page.click_ok_on_alert()
-
-        breakpoint()
 
         addresses_list_page.click_new_address_link()
 

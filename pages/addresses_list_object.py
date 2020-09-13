@@ -51,20 +51,31 @@ class AddressesListPage(BasePage):
         )
 
     def click_destroy_link(self):
-        self.find_elements(
-            (By.XPATH, "//tr")
-        )
-
         self.wait_until_text_in_element(
-            (By.LINK_TEXT, "Destroy"),
-            "Destroy"
+            (By.LINK_TEXT, "New Address"),
+            "New Address"
         )
 
-        destroy_link = self.driver.find_element(
-            By.LINK_TEXT, "Destroy"
+
+        na = self.driver.find_element(
+            By.LINK_TEXT, "New Address"
         )
 
-        return destroy_link.click()
+        na.click()
+        # breakpoint()
+
+        # self.wait_until_text_in_element(
+        #     (By.LINK_TEXT, "Destroy"),
+        #     "Destroy"
+        # )
+        #
+        # destroy_link = self.driver.find_element(
+        #     By.LINK_TEXT, "Destroy"
+        # )
+        #
+        # destroy_link.click()
+        #
+        # self.wait_until_alert_appear()
 
     def click_ok_on_alert(self):
         self.wait_until_alert_appear()

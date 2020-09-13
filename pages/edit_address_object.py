@@ -75,6 +75,21 @@ class EditAddressPage(BasePage):
     def clean_field(self, locator):
         return self.find_element(locator).clear()
 
+    def click_update_address_btn(self):
+        self.wait_until_element_clickable(
+            (By.NAME, "commit")
+        )
+
+        update_address_btn = self.driver.find_element(
+            By.NAME, "commit"
+        )
+
+        update_address_btn.click()
+
+        self.find_element(
+            (By.CLASS_NAME, "container")
+        )
+
 
 # class Converters:
 #     def hex_to_rgb(self, value):

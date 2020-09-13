@@ -4,11 +4,7 @@ from selenium.webdriver.support.ui import Select
 
 
 class NewAddressLocators:
-    # locator_new_address_link = (By.LINK_TEXT, "New Address")
     locator_list_link = (By.LINK_TEXT, "List")
-    # locator_show_address_link = (By.LINK_TEXT, "Show")
-    # locator_edit_address_link = (By.LINK_TEXT, "Edit")
-    # locator_destroy_address_link = (By.LINK_TEXT, "Destroy")
     locator_first_name_field = (By.NAME, "address[first_name]")
     locator_last_name_field = (By.NAME, "address[last_name]")
     locator_address1_field = (By.NAME, "address[address1]")
@@ -29,11 +25,7 @@ class NewAddressLocators:
     locator_dancing = (By.ID, "address_interest_dance")
     locator_reading = (By.ID, "address_interest_read")
     locator_note = (By.ID, "address_note")
-    # locator_create_update_address_btn = (By.NAME, "commit")
     locator_create_address_btn = (By.NAME, "commit")
-    # locator_result_container = (By.CLASS_NAME, "container")
-    # locator_container_options = (By.XPATH, "//p")
-    # locator_destroyed_message = (By.XPATH, "/html/body/div/div")
     locator_required_fields_error = (By.XPATH, ".//div[@id = 'error_explanation']")
 
 
@@ -52,32 +44,37 @@ class NewAddressPage(BasePage):
             raise Exception("Provide 'Yes' or 'No'")
 
     def set_data_to_field(self, field_locator, data):
-        return self.find_element(
-            field_locator)\
-            .send_keys(data)
+        return self.find_element(field_locator).send_keys(data)
 
     def select_dropdown_option(self, dropdown_locator, value):
-        dropdown = Select(self.find_element(
-            dropdown_locator))
+        dropdown = Select(
+            self.find_element(dropdown_locator)
+        )
         return dropdown.select_by_value(value)
 
     def select_element_by_locator(self, locator):
-        element = Select(self.find_element(locator))
+        element = Select(
+            self.find_element(locator)
+        )
         return element
 
     def select_state(self, state):
         if state == "us":
-            self.click_on_element(NewAddressLocators.locator_address_country_us)
+            self.click_on_element(
+                NewAddressLocators.locator_address_country_us
+            )
         elif state == "canada":
-            self.click_on_element(NewAddressLocators.locator_address_country_canada)
+            self.click_on_element(
+                NewAddressLocators.locator_address_country_canada
+            )
         else:
             pass
 
     def clean_field(self, locator):
         return self.find_element(locator).clear()
 
-    def click_list_link(self):
-        pass
+    # def click_list_link(self):
+    #     pass
 
     def click_create_address_btn(self):
         self.wait_until_element_clickable(
@@ -90,8 +87,9 @@ class NewAddressPage(BasePage):
 
         create_address_btn.click()
 
-
-
+        self.find_element(
+            (By.CLASS_NAME, "container")
+        )
 
 
 class Converters:

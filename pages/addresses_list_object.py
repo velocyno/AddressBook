@@ -1,8 +1,5 @@
 from base.base_page import BasePage
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import time
 
 
 class AddressesListLocators:
@@ -44,24 +41,29 @@ class AddressesListPage(BasePage):
 
         show_link.click()
 
-        # self.wait_until_visible(
-        #     (By.CLASS_NAME, "container")
-        # )
-
         self.wait_until_text_in_element(
             (By.LINK_TEXT, "List"),
             "List"
         )
 
-    def click_destroy_link(self):
-        # WebDriverWait(self.driver, 10).until(
-        #     EC.presence_of_all_elements_located(
-        #         (By.XPATH, "//td"),
-        #     ),
-        #     message=f"Locator is not visible"
-        # )
-        # time.sleep(2)
+    def click_edit_link(self):
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "Edit"),
+            "Edit"
+        )
 
+        edit_link = self.driver.find_element(
+            By.LINK_TEXT, "Edit"
+        )
+
+        edit_link.click()
+
+        self.wait_until_text_in_element(
+            (By.TAG_NAME, "h2"),
+            "Editing Address"
+        )
+
+    def click_destroy_link(self):
         self.find_element(
             (By.XPATH, "//tr")
         )

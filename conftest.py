@@ -23,6 +23,7 @@ def data_fixture_js():
     yield data_from_file
     json_file.close()
 
+
 def pytest_generate_tests(metafunc):
     if "data_gen" in metafunc.fixturenames:
         cur_path = pathlib.Path(__file__).parent

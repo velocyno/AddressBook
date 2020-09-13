@@ -1,5 +1,8 @@
 from base.base_page import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import time
 
 
 class AddressesListLocators:
@@ -51,31 +54,39 @@ class AddressesListPage(BasePage):
         )
 
     def click_destroy_link(self):
+        # WebDriverWait(self.driver, 10).until(
+        #     EC.presence_of_all_elements_located(
+        #         (By.XPATH, "//td"),
+        #     ),
+        #     message=f"Locator is not visible"
+        # )
+        # time.sleep(2)
+
+        self.find_element(
+            (By.XPATH, "//tr")
+        )
+
+        self.find_elements(
+            (By.XPATH, "//td")
+        )
+
         self.wait_until_text_in_element(
-            (By.LINK_TEXT, "New Address"),
-            "New Address"
+            (By.LINK_TEXT, "Show"),
+            "Show"
         )
 
-
-        na = self.driver.find_element(
-            By.LINK_TEXT, "New Address"
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "Edit"),
+            "Edit"
         )
 
-        na.click()
-        # breakpoint()
+        destroy_link = self.driver.find_element(
+            By.LINK_TEXT, "Destroy"
+        )
 
-        # self.wait_until_text_in_element(
-        #     (By.LINK_TEXT, "Destroy"),
-        #     "Destroy"
-        # )
-        #
-        # destroy_link = self.driver.find_element(
-        #     By.LINK_TEXT, "Destroy"
-        # )
-        #
-        # destroy_link.click()
-        #
-        # self.wait_until_alert_appear()
+        destroy_link.click()
+
+        self.wait_until_alert_appear()
 
     def click_ok_on_alert(self):
         self.wait_until_alert_appear()

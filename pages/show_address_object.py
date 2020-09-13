@@ -42,6 +42,11 @@ class ShowAddressPage(BasePage):
             "List"
         )
 
+        self.wait_until_text_in_element(
+            (By.LINK_TEXT, "Edit"),
+            "Edit"
+        )
+
         results = self.driver.find_elements(By.XPATH, "//p")
 
         for element in results:

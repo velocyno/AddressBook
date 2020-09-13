@@ -280,12 +280,12 @@ class TestShowAddress:
 
         show_address_page.click_list_link()
 
-        breakpoint()
         addresses_list_page.click_destroy_link()
 
         addresses_list_page.click_ok_on_alert()
-
-        addresses_list_page.click_new_address_link()
+        # breakpoint()
+        #
+        # addresses_list_page.click_new_address_link()
 
 
     # def test_edit_addresses(self, browser_fixture, data_fixture_js):

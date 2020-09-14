@@ -73,9 +73,6 @@ class NewAddressPage(BasePage):
     def clean_field(self, locator):
         return self.find_element(locator).clear()
 
-    # def click_list_link(self):
-    #     pass
-
     def click_create_address_btn(self):
         self.wait_until_element_clickable(
             (By.NAME, "commit")

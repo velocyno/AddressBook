@@ -3,14 +3,9 @@ from pages.sign_up_object import SignUpSearchHelper
 from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
 from pages.addresses_list_object import AddressesListPage
-from pages.addresses_list_object import AddressesListLocators as ALL
 from pages.new_address_object import NewAddressPage
 from pages.new_address_object import NewAddressLocators as NAL
-from pages.show_address_object import ShowAddressPage
 from pages.new_address_object import Converters
-
-# from pages.adresses_object import AddressesSearchHelper
-# from pages.adresses_object import AddressesLocators as AL
 
 
 class TestHelper:
@@ -26,6 +21,7 @@ class TestHelper:
         except TimeoutException:
             pass
 
+
     def add_address(self, browser_fixture, data_fixture_js):
         session_email = data_fixture_js["session_email2"]
         session_password = data_fixture_js["session_password2"]
@@ -34,7 +30,6 @@ class TestHelper:
         common = CommonSearchHelper(browser_fixture)
         addresses_list_page = AddressesListPage(browser_fixture)
         new_address_page = NewAddressPage(browser_fixture)
-        show_address_page = ShowAddressPage(browser_fixture)
         converter = Converters()
 
         page.go_to_sign_in_page()
@@ -43,9 +38,7 @@ class TestHelper:
         page.click_sign_in_btn()
         common.click_addresses()
 
-        addresses_list_page.click_on_element(
-            ALL.locator_new_address_link
-        )
+        addresses_list_page.click_new_address_link()
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
@@ -138,51 +131,6 @@ class TestHelper:
             data_fixture_js["dict_add_address"]["Note:"]
         )
 
-        new_address_page.click_on_element(
-            NAL.locator_create_address_btn
-        )
+        new_address_page.click_create_address_btn()
 
         common.click_sign_out()
-
-        # common.click_sign_out()
-
-    # def add_address(self, browser_fixture, data_fixture_js):
-    #     common = CommonSearchHelper(browser_fixture)
-    #     addresses = AddressesSearchHelper(browser_fixture)
-    #
-    #     common.click_addresses()
-    #
-    #     addresses.click_on_element(
-    #         AL.locator_new_address_link
-    #     )
-    #
-    #     addresses.set_data_to_field(
-    #         AL.locator_first_name_field,
-    #         data_fixture_js["dict_add_address"]["First name:"]
-    #     )
-    #
-    #     addresses.set_data_to_field(
-    #         AL.locator_last_name_field,
-    #         data_fixture_js["dict_add_address"]["Last name:"]
-    #     )
-    #
-    #     addresses.set_data_to_field(
-    #         AL.locator_address1_field,
-    #         data_fixture_js["dict_add_address"]["Street Address:"]
-    #     )
-    #
-    #     addresses.set_data_to_field(
-    #         AL.locator_city,
-    #         data_fixture_js["dict_add_address"]["City:"]
-    #     )
-    #
-    #     addresses.set_data_to_field(
-    #         AL.locator_zip_code,
-    #         data_fixture_js["dict_add_address"]["Zip code:"]
-    #     )
-    #
-    #     addresses.click_on_element(
-    #         AL.locator_create_update_address_btn
-    #     )
-    #
-    #     common.click_sign_out()

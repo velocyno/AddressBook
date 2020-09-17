@@ -9,6 +9,7 @@ class AddressesListLocators:
     locator_destroy_address_link = (By.LINK_TEXT, "Destroy")
     locator_destroyed_message = (By.XPATH, "/html/body/div/div")
     locator_create_update_address_btn = (By.NAME, "commit")
+    locator_addresses_page_header = (By.TAG_NAME, "h2")
 
 
 class AddressesListPage(BasePage):

@@ -94,8 +94,8 @@ class TestEditAddressNegative:
             before_all.add_address(browser_fixture, data_fixture_js)
             TestEditAddressNegative.before_all = True
 
-        session_email = data_fixture_js["session_email2"]
-        session_password = data_fixture_js["session_password2"]
+        session_email = data_fixture_js["session_email"]
+        session_password = data_fixture_js["session_password"]
 
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)

@@ -1,7 +1,8 @@
 from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
-from pages.adresses_object import AddressesLocators as AL
-from pages.adresses_object import AddressesSearchHelper
+from pages.addresses_list_object import AddressesListPage
+from pages.new_address_object import NewAddressLocators as NAL
+from pages.new_address_object import NewAddressPage
 import pytest
 
 
@@ -82,51 +83,46 @@ class TestAddAddressNegative:
         session_password = data_fixture_js["session_password2"]
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
-        addresses = AddressesSearchHelper(browser_fixture)
+        addresses_list_page = AddressesListPage(browser_fixture)
+        new_address_page = NewAddressPage(browser_fixture)
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
         page.click_sign_in_btn()
         common.click_addresses()
 
-        addresses.click_on_element(
-            AL.locator_new_address_link
-        )
+        addresses_list_page.click_new_address_link()
 
-        common = CommonSearchHelper(browser_fixture)
-        addresses = AddressesSearchHelper(browser_fixture)
-
-        addresses.set_data_to_field(
-            AL.locator_first_name_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_first_name_field,
             test_input["first_name"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_last_name_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_last_name_field,
             test_input["last_name"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_address1_field,
+        new_address_page.set_data_to_field(
+            NAL.locator_address1_field,
             test_input["address1"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_city,
+        new_address_page.set_data_to_field(
+            NAL.locator_city,
             test_input["city"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_zip_code,
+        new_address_page.set_data_to_field(
+            NAL.locator_zip_code,
             test_input["zip_code"]
         )
 
-        addresses.click_on_element(
-            AL.locator_create_update_address_btn
-        )
+        new_address_page.click_create_address_btn()
 
         error_message = common.get_text_from_element(
-            AL.locator_required_fields_error
+            NAL.locator_required_fields_error
         )
         assert error_message == expected
+
         common.click_sign_out()

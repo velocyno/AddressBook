@@ -1,14 +1,16 @@
 from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
-from pages.adresses_object import AddressesLocators as AL
-from pages.adresses_object import AddressesSearchHelper
-from pages.adresses_object import Converters
-import time
+from pages.addresses_list_object import AddressesListPage
+from pages.edit_address_object import EditAddressesLocators as EAL
+from pages.edit_address_object import EditAddressPage
+from pages.show_address_object import ShowAddressPage
 from tests.test_helper import TestHelper
 import pytest
 
 
 class TestEditAddressNegative:
+    before_all = False
+
     @pytest.mark.parametrize(
         "test_input,expected",
         [
@@ -87,74 +89,64 @@ class TestEditAddressNegative:
             test_input,
             expected
     ):
+        if not TestEditAddressNegative.before_all:
+            before_all = TestHelper()
+            before_all.add_address(browser_fixture, data_fixture_js)
+            TestEditAddressNegative.before_all = True
+
         session_email = data_fixture_js["session_email2"]
         session_password = data_fixture_js["session_password2"]
+
         page = SignInSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)
-        addresses = AddressesSearchHelper(browser_fixture)
+        addresses_list_page = AddressesListPage(browser_fixture)
+        edit_address_page = EditAddressPage(browser_fixture)
+        show_address_page = ShowAddressPage(browser_fixture)
+
         page.go_to_sign_in_page()
-        # page.go_to_home_page()
-        # common.click_sign_in()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
         page.click_sign_in_btn()
         common.click_addresses()
+        addresses_list_page.click_edit_link()
 
-        rows = addresses.find_elements_by_locator(AL.locator_rows_in_table)
+        edit_address_page.clean_field(EAL.locator_first_name_field)
+        edit_address_page.clean_field(EAL.locator_last_name_field)
+        edit_address_page.clean_field(EAL.locator_address1_field)
+        edit_address_page.clean_field(EAL.locator_city)
+        edit_address_page.clean_field(EAL.locator_zip_code)
 
-        if len(rows) < 2:
-            test_helper = TestHelper()
-            test_helper.add_address(browser_fixture, data_fixture_js)
-
-        addresses.click_on_element(AL.locator_edit_address_link)
-
-        addresses.clean_field(AL.locator_first_name_field)
-        addresses.clean_field(AL.locator_last_name_field)
-        addresses.clean_field(AL.locator_address1_field)
-        addresses.clean_field(AL.locator_city)
-        addresses.clean_field(AL.locator_zip_code)
-
-        addresses.set_data_to_field(
-            AL.locator_first_name_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_first_name_field,
             test_input["first_name"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_last_name_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_last_name_field,
             test_input["last_name"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_address1_field,
+        edit_address_page.set_data_to_field(
+            EAL.locator_address1_field,
             test_input["address1"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_city,
+        edit_address_page.set_data_to_field(
+            EAL.locator_city,
             test_input["city"]
         )
 
-        addresses.set_data_to_field(
-            AL.locator_zip_code,
+        edit_address_page.set_data_to_field(
+            EAL.locator_zip_code,
             test_input["zip_code"]
         )
 
-
-        addresses.click_on_element(
-            AL.locator_create_update_address_btn
-        )
+        edit_address_page.click_update_address_btn()
 
         error_message = common.get_text_from_element(
-            AL.locator_required_fields_error
+            EAL.locator_required_fields_error
         )
 
-
-        addresses.click_on_element(AL.locator_list_link)
-        addresses.click_on_element(AL.locator_destroy_address_link)
-        popup = addresses.driver.switch_to.alert
-        popup.accept()
-        time.sleep(2)
+        assert error_message == expected
 
         common.click_sign_out()
-
-        assert error_message == expected

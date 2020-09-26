@@ -26,17 +26,17 @@ class TestAddAddress:
 
         url = f"{page.base_url}session"
         headers_log_in = requests.post(url, data={
-            "session[email]": "mymail@i.ua",
-            "session[password]": "123456"
+            "session[email]": f"{session_email}",
+            "session[password]": f"{session_password}"
             }
         )
-        # breakpoint()
+
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
         page.click_sign_in_btn()
-        request = requests.get(page.base_url)
-        cookies = page.driver.get_cookies()
+        # request = requests.get(page.base_url)
+        # cookies = page.driver.get_cookies()
 
         common.click_addresses()
 

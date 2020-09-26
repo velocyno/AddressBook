@@ -14,6 +14,7 @@ from pages.new_address_object import Converters
 
 class TestAddAddress:
     def test_add_address(self, browser_fixture, data_fixture_js):
+        addresses_to_delete = []
         session_email = data_fixture_js["session_email2"]
         session_password = data_fixture_js["session_password2"]
 
@@ -137,6 +138,8 @@ class TestAddAddress:
 
         show_address_url = show_address_page.driver.current_url
 
+        addresses_to_delete.append(show_address_url)
+
         dict_results = show_address_page.get_results_shown()
 
         assert show_address_page.find_element(
@@ -150,8 +153,10 @@ class TestAddAddress:
                 "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
         }
 
-        delete_address = requests.delete(show_address_url, headers=build_headers)
+        # delete_address = requests.delete(show_address_url, headers=build_headers)
 
+        for address in addresses_to_delete:
+            delete_address = requests.delete(address, headers=build_headers)
 
         # show_address_page.click_list_link()
         #

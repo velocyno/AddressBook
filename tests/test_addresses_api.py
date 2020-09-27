@@ -13,8 +13,7 @@ from pages.new_address_object import Converters
 
 
 class TestAddAddress:
-    def test_add_address(self, browser_fixture, data_fixture_js):
-        addresses_to_delete = []
+    def test_add_address(self, browser_fixture, data_fixture_js, delete_address):
         session_email = data_fixture_js["session_email2"]
         session_password = data_fixture_js["session_password2"]
 
@@ -32,12 +31,16 @@ class TestAddAddress:
             }
         )
 
+        build_headers = {
+            "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
+        }
+
+        delete_address['headers'] = build_headers
+
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
         page.click_sign_in_btn()
-        # request = requests.get(page.base_url)
-        # cookies = page.driver.get_cookies()
 
         common.click_addresses()
 
@@ -138,7 +141,7 @@ class TestAddAddress:
 
         show_address_url = show_address_page.driver.current_url
 
-        addresses_to_delete.append(show_address_url)
+        delete_address['address'].append(show_address_url)
 
         dict_results = show_address_page.get_results_shown()
 
@@ -148,15 +151,10 @@ class TestAddAddress:
 
         assert data_fixture_js["dict_add_address"] == dict_results
 
-
-        build_headers = {
-                "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
-        }
-
         # delete_address = requests.delete(show_address_url, headers=build_headers)
 
-        for address in addresses_to_delete:
-            delete_address = requests.delete(address, headers=build_headers)
+        # for address in delete_address:
+        #     delete_address = requests.delete(address, headers=build_headers)
 
         # show_address_page.click_list_link()
         #

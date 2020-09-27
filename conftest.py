@@ -3,6 +3,7 @@ import json
 from selenium import webdriver
 from webdriverdownloader import ChromeDriverDownloader
 import pathlib
+import requests
 
 
 @pytest.fixture(scope="session")
@@ -22,6 +23,14 @@ def data_fixture_js():
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()
+
+
+@pytest.fixture
+def delete_address():
+    addresses_to_delete = {'address': [], 'headers': ''}
+    yield addresses_to_delete
+    for address in addresses_to_delete['address']:
+        requests.delete(address, headers=addresses_to_delete['headers'])
 
 
 def pytest_generate_tests(metafunc):

@@ -11,25 +11,6 @@ import requests
 
 
 class TestHelper:
-    class DeleteAddressAfterTest:
-        def delete_address_after_test(self, browser_fixture, data_fixture_js):
-            session_email = data_fixture_js["session_email2"]
-            session_password = data_fixture_js["session_password2"]
-            page = BasePage()
-
-            url = f"{page.base_url}session"
-            headers_log_in = requests.post(url, data={
-                "session[email]": f"{session_email}",
-                "session[password]": f"{session_password}"
-                }
-            )
-
-            build_headers = {
-                "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
-            }
-
-            # delete_address = requests.delete(show_address_url, headers=build_headers)
-
     class CreateUser:
         def create_user(self, browser_fixture):
             sign_up_page = SignUpSearchHelper(browser_fixture)

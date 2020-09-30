@@ -35,10 +35,9 @@ class TestAddAddress:
             "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
         }
 
-        delete_address['headers'] = build_headers
+        # delete_address['headers'] = build_headers
 
         # delete_address[f"{headers_log_in.headers['Set-Cookie']}"] = []
-        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"].append(show_address_page.driver.current_url)
 
         # show_address_url = show_address_page.driver.current_url
 
@@ -90,17 +89,17 @@ class TestAddAddress:
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_birthday,
-        #     converter.date_converter(
-        #         data_fixture_js["dict_add_address"]["Birthday:"]
-        #     )
-        # )
-
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            data_fixture_js["dict_add_address"]["Birthday:"]
+            converter.date_converter(
+                data_fixture_js["dict_add_address"]["Birthday:"]
+            )
         )
+
+        # new_address_page.set_data_to_field(
+        #     NAL.locator_birthday,
+        #     data_fixture_js["dict_add_address"]["Birthday:"]
+        # )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
@@ -151,7 +150,15 @@ class TestAddAddress:
 
         show_address_url = show_address_page.driver.current_url
 
-        delete_address['address'].append(show_address_url)
+        # delete_address['address'].append(show_address_url)
+        breakpoint()
+
+        delete_address["a"] = "b"
+        # delete_address[build_headers].append(show_address_url)
+
+        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"].append(
+        #     show_address_page.driver.current_url
+        # )
 
         dict_results = show_address_page.get_results_shown()
 

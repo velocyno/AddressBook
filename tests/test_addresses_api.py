@@ -37,6 +37,11 @@ class TestAddAddress:
 
         delete_address['headers'] = build_headers
 
+        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"] = []
+        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"].append(show_address_page.driver.current_url)
+
+        # show_address_url = show_address_page.driver.current_url
+
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)

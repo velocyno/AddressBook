@@ -1,6 +1,8 @@
 {
   "session_email": "andrii1@i.ua",
   "session_password": "123456",
+  "session_email2": "mymail@i.ua",
+  "session_password2": "123456",
   "dict_add_address": {
     "First name:": "Andrii",
     "Last name:": "AQA",
@@ -47,6 +49,28 @@
     "pair2": {
       "email": "mymail@i.ua",
       "password": "123456"
+    }
+  },
+  "address_negative": {
+    "p1": {
+      "test_input": {
+        "first_name": "",
+        "last_name": "",
+        "address1": "",
+        "city": "",
+        "zip_code": ""
+      },
+      "expected": "5 errors prohibited this address from being saved:\nFirst name can't be blank\nLast name can't be blank\nAddress1 can't be blank\nCity can't be blank\nZip code can't be blank"
+    },
+    "p2": {
+      "test_input": {
+        "first_name": "Andrii",
+        "last_name": "",
+        "address1": "",
+        "city": "",
+        "zip_code": ""
+      },
+      "expected": "4 errors prohibited this address from being saved:\nLast name can't be blank\nAddress1 can't be blank\nCity can't be blank\nZip code can't be blank"
     }
   }
 }

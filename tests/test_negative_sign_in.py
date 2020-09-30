@@ -1,13 +1,10 @@
 from pages.sign_in_object import SignInSearchHelper
-from pages.sign_up_object import SignUpSearchHelper
 from pages.common_objects import CommonSearchHelper
-from pages.adresses_object import AddressesLocators as AL
-from pages.adresses_object import AddressesSearchHelper
-from selenium.common.exceptions import TimeoutException
 from tests.test_helper import TestHelper
 import pytest
 import random
 import string
+
 
 class TestSignInNegative:
     user_created = False

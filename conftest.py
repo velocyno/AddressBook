@@ -6,7 +6,7 @@ import pathlib
 import requests
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="class")
 def browser_fixture():
     chrome_driver = ChromeDriverDownloader()
     driver_path = chrome_driver.download_and_install()
@@ -19,7 +19,8 @@ def browser_fixture():
 @pytest.fixture
 def data_fixture_js():
     cur_path = pathlib.Path(__file__).parent
-    json_file = open(f'{cur_path}\\test_input_data\\qa.json')
+    # json_file = open(f'{cur_path}\\test_input_data\\qa.json')
+    json_file = open(f'{cur_path}/test_input_data/qa.json')
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()
@@ -28,6 +29,7 @@ def data_fixture_js():
 @pytest.fixture
 def delete_address():
     addresses_to_delete = {'address': [], 'headers': ''}
+    # addresses_to_delete = {}
     yield addresses_to_delete
     for address in addresses_to_delete['address']:
         requests.delete(address, headers=addresses_to_delete['headers'])
@@ -36,7 +38,8 @@ def delete_address():
 def pytest_generate_tests(metafunc):
     if "data_gen" in metafunc.fixturenames:
         cur_path = pathlib.Path(__file__).parent
-        file = open(f'{cur_path}\\test_input_data\\qa.json')
+        # file = open(f'{cur_path}\\test_input_data\\qa.json')
+        file = open(f'{cur_path}/test_input_data/qa.json')
         data = [json.load(file)]
         metafunc.parametrize("data_gen", [
             data[0]["address_negative"]["p1"],

@@ -37,6 +37,11 @@ class TestAddAddress:
 
         delete_address['headers'] = build_headers
 
+        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"] = []
+        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"].append(show_address_page.driver.current_url)
+
+        # show_address_url = show_address_page.driver.current_url
+
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
@@ -85,11 +90,16 @@ class TestAddAddress:
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
+        # new_address_page.set_data_to_field(
+        #     NAL.locator_birthday,
+        #     converter.date_converter(
+        #         data_fixture_js["dict_add_address"]["Birthday:"]
+        #     )
+        # )
+
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            data_fixture_js["dict_add_address"]["Birthday:"]
         )
 
         new_address_page.set_data_to_field(
@@ -109,8 +119,8 @@ class TestAddAddress:
             data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture)\
-            .send_keys("C:\\123.png")
+        # new_address_page.find_element(NAL.locator_picture)\
+        #     .send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
             NAL.locator_phone,
@@ -224,11 +234,16 @@ class TestShowAddress:
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
+        # new_address_page.set_data_to_field(
+        #     NAL.locator_birthday,
+        #     converter.date_converter(
+        #         data_fixture_js["dict_add_address"]["Birthday:"]
+        #     )
+        # )
+
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            data_fixture_js["dict_add_address"]["Birthday:"]
         )
 
         new_address_page.set_data_to_field(
@@ -248,8 +263,8 @@ class TestShowAddress:
             data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture) \
-            .send_keys("C:\\123.png")
+        # new_address_page.find_element(NAL.locator_picture) \
+        #     .send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
             NAL.locator_phone,
@@ -365,11 +380,16 @@ class TestEditAddress:
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
+        # new_address_page.set_data_to_field(
+        #     NAL.locator_birthday,
+        #     converter.date_converter(
+        #         data_fixture_js["dict_add_address"]["Birthday:"]
+        #     )
+        # )
+
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_add_address"]["Birthday:"]
-            )
+            data_fixture_js["dict_add_address"]["Birthday:"]
         )
 
         new_address_page.set_data_to_field(
@@ -389,8 +409,8 @@ class TestEditAddress:
             data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture) \
-            .send_keys("C:\\123.png")
+        # new_address_page.find_element(NAL.locator_picture) \
+        #     .send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
             NAL.locator_phone,
@@ -477,11 +497,16 @@ class TestEditAddress:
             data_fixture_js["dict_edit_address"]["Country:"]
         )
 
+        # edit_address_page.set_data_to_field(
+        #     EAL.locator_birthday,
+        #     converter.date_converter(
+        #         data_fixture_js["dict_edit_address"]["Birthday:"]
+        #     )
+        # )
+
         edit_address_page.set_data_to_field(
             EAL.locator_birthday,
-            converter.date_converter(
-                data_fixture_js["dict_edit_address"]["Birthday:"]
-            )
+            data_fixture_js["dict_edit_address"]["Birthday:"]
         )
 
         edit_address_page.set_data_to_field(
@@ -622,8 +647,8 @@ class TestDestroyAddress:
             data_fixture_js["dict_add_address"]["Website:"]
         )
 
-        new_address_page.find_element(NAL.locator_picture) \
-            .send_keys("C:\\123.png")
+        # new_address_page.find_element(NAL.locator_picture) \
+        #     .send_keys("C:\\123.png")
 
         new_address_page.set_data_to_field(
             NAL.locator_phone,

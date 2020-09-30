@@ -30,7 +30,6 @@ class AddressesListPage(BasePage):
         )
 
     def click_show_address_link(self):
-        breakpoint()
         self.wait_until_text_in_element(
             (By.LINK_TEXT, "Show"),
             "Show"

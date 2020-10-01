@@ -35,12 +35,6 @@ class TestAddAddress:
             "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
         }
 
-        # delete_address['headers'] = build_headers
-
-        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"] = []
-
-        # show_address_url = show_address_page.driver.current_url
-
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
         page.type_sign_in_password(session_password)
@@ -150,15 +144,7 @@ class TestAddAddress:
 
         show_address_url = show_address_page.driver.current_url
 
-        # delete_address['address'].append(show_address_url)
-        breakpoint()
-
-        delete_address["a"] = "b"
-        # delete_address[build_headers].append(show_address_url)
-
-        # delete_address[f"{headers_log_in.headers['Set-Cookie']}"].append(
-        #     show_address_page.driver.current_url
-        # )
+        delete_address[show_address_url] = build_headers
 
         dict_results = show_address_page.get_results_shown()
 
@@ -198,8 +184,6 @@ class TestShowAddress:
             "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
         }
 
-        delete_address['headers'] = build_headers
-
         addresses_list_page.click_new_address_link()
 
         new_address_page.set_data_to_field(
@@ -241,17 +225,17 @@ class TestShowAddress:
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_birthday,
-        #     converter.date_converter(
-        #         data_fixture_js["dict_add_address"]["Birthday:"]
-        #     )
-        # )
-
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            data_fixture_js["dict_add_address"]["Birthday:"]
+            converter.date_converter(
+                data_fixture_js["dict_add_address"]["Birthday:"]
+            )
         )
+
+        # new_address_page.set_data_to_field(
+        #     NAL.locator_birthday,
+        #     data_fixture_js["dict_add_address"]["Birthday:"]
+        # )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
@@ -302,11 +286,9 @@ class TestShowAddress:
 
         show_address_url = show_address_page.driver.current_url
 
-        delete_address['address'].append(show_address_url)
+        delete_address[show_address_url] = build_headers
 
-        show_address_page.click_list_link()
-
-        addresses_list_page.click_show_address_link()
+        # addresses_list_page.click_show_address_link()
         # sh = self.driver.find_element_by_xpath("//a[@data-test='show-776']")
 
         dict_results = show_address_page.get_results_shown()
@@ -337,8 +319,6 @@ class TestEditAddress:
         build_headers = {
             "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
         }
-
-        delete_address['headers'] = build_headers
 
         page.go_to_sign_in_page()
         page.type_sign_in_email(session_email)
@@ -387,17 +367,17 @@ class TestEditAddress:
             data_fixture_js["dict_add_address"]["Country:"]
         )
 
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_birthday,
-        #     converter.date_converter(
-        #         data_fixture_js["dict_add_address"]["Birthday:"]
-        #     )
-        # )
-
         new_address_page.set_data_to_field(
             NAL.locator_birthday,
-            data_fixture_js["dict_add_address"]["Birthday:"]
+            converter.date_converter(
+                data_fixture_js["dict_add_address"]["Birthday:"]
+            )
         )
+
+        # new_address_page.set_data_to_field(
+        #     NAL.locator_birthday,
+        #     data_fixture_js["dict_add_address"]["Birthday:"]
+        # )
 
         new_address_page.set_data_to_field(
             NAL.locator_color,
@@ -448,7 +428,7 @@ class TestEditAddress:
 
         show_address_url = show_address_page.driver.current_url
 
-        delete_address['address'].append(show_address_url)
+        delete_address[show_address_url] = build_headers
 
         show_address_page.click_list_link()
 
@@ -504,17 +484,17 @@ class TestEditAddress:
             data_fixture_js["dict_edit_address"]["Country:"]
         )
 
-        # edit_address_page.set_data_to_field(
-        #     EAL.locator_birthday,
-        #     converter.date_converter(
-        #         data_fixture_js["dict_edit_address"]["Birthday:"]
-        #     )
-        # )
-
         edit_address_page.set_data_to_field(
             EAL.locator_birthday,
-            data_fixture_js["dict_edit_address"]["Birthday:"]
+            converter.date_converter(
+                data_fixture_js["dict_edit_address"]["Birthday:"]
+            )
         )
+
+        # edit_address_page.set_data_to_field(
+        #     EAL.locator_birthday,
+        #     data_fixture_js["dict_edit_address"]["Birthday:"]
+        # )
 
         edit_address_page.set_data_to_field(
             EAL.locator_color,

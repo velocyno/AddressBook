@@ -28,15 +28,10 @@ def data_fixture_js():
 
 @pytest.fixture
 def delete_address():
-    # addresses_to_delete = {'address': [], 'headers': ''}
     addresses_to_delete = {}
     yield addresses_to_delete
-    # for address in addresses_to_delete['address']:
-    #     requests.delete(address, headers=addresses_to_delete['headers'])
-    breakpoint()
-    for headers, address in addresses_to_delete.items():
+    for address, headers in addresses_to_delete.items():
         requests.delete(address, headers=headers)
-
 
 
 def pytest_generate_tests(metafunc):

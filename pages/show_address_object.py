@@ -58,3 +58,7 @@ class ShowAddressPage(BasePage):
             dict_results[key] = value
 
         return dict_results
+
+    def check_results_shown(self, address_json):
+        dict_results = self.get_results_shown()
+        assert address_json == dict_results

@@ -5,8 +5,9 @@ from pages.common_objects import CommonSearchHelper
 from pages.addresses_list_object import AddressesListPage
 from pages.new_address_object import NewAddressPage
 from pages.new_address_object import NewAddressLocators as NAL
+from pages.show_address_object import ShowAddressPage
 from pages.new_address_object import Converters
-from base.base_page import BasePage
+import platform
 import requests
 
 
@@ -25,7 +26,7 @@ class TestHelper:
                 pass
 
     class AddAddress:
-        def add_address(self, browser_fixture, data_fixture_js):
+        def add_address(self, browser_fixture, data_fixture_js, delete_address):
             session_email = data_fixture_js["session_email2"]
             session_password = data_fixture_js["session_password2"]
 
@@ -33,7 +34,21 @@ class TestHelper:
             common = CommonSearchHelper(browser_fixture)
             addresses_list_page = AddressesListPage(browser_fixture)
             new_address_page = NewAddressPage(browser_fixture)
+            show_address_page = ShowAddressPage(browser_fixture)
             converter = Converters()
+
+            url = f"{page.base_url}session"
+            headers_log_in = requests.post(url, data={
+                "session[email]": f"{session_email}",
+                "session[password]": f"{session_password}"
+            }
+                                           )
+
+            build_headers = {
+                "Cookie": f"{headers_log_in.headers['Set-Cookie']}"
+            }
+
+            delete_address['headers'] = build_headers
 
             page.go_to_sign_in_page()
             page.type_sign_in_email(session_email)
@@ -82,12 +97,18 @@ class TestHelper:
                 data_fixture_js["dict_add_address"]["Country:"]
             )
 
-            new_address_page.set_data_to_field(
-                NAL.locator_birthday,
-                converter.date_converter(
+            if platform.system() == "Linux":
+                new_address_page.set_data_to_field(
+                    NAL.locator_birthday,
                     data_fixture_js["dict_add_address"]["Birthday:"]
                 )
-            )
+            else:
+                new_address_page.set_data_to_field(
+                    NAL.locator_birthday,
+                    converter.date_converter(
+                        data_fixture_js["dict_add_address"]["Birthday:"]
+                    )
+                )
 
             new_address_page.set_data_to_field(
                 NAL.locator_color,
@@ -106,8 +127,8 @@ class TestHelper:
                 data_fixture_js["dict_add_address"]["Website:"]
             )
 
-            new_address_page.find_element(NAL.locator_picture)\
-                .send_keys("C:\\123.png")
+            # new_address_page.find_element(NAL.locator_picture)\
+            #     .send_keys("C:\\123.png")
 
             new_address_page.set_data_to_field(
                 NAL.locator_phone,
@@ -136,4 +157,5 @@ class TestHelper:
 
             new_address_page.click_create_address_btn()
 
-            common.click_sign_out()
+            show_address_url = show_address_page.driver.current_url
+            delete_address['address'].append(show_address_url)

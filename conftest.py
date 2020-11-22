@@ -29,7 +29,8 @@ def data_fixture_js():
 @pytest.fixture
 def add_address_fixture(browser_fixture, data_fixture_js, delete_address):
     add_address_helper = TestHelper.AddAddress()
-    add_address_helper.add_address(browser_fixture, data_fixture_js, delete_address)
+    address_url = add_address_helper.add_address(browser_fixture, data_fixture_js, delete_address)
+    yield address_url
 
 
 @pytest.fixture

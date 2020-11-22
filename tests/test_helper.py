@@ -159,3 +159,5 @@ class TestHelper:
 
             show_address_url = show_address_page.driver.current_url
             delete_address['address'].append(show_address_url)
+
+            return show_address_url.split(addresses_list_page.base_url)[1]

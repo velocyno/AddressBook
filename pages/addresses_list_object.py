@@ -12,6 +12,9 @@ class AddressesListLocators:
 
 
 class AddressesListPage(BasePage):
+    def navigate(self):
+        self.driver.get(self.base_url + "addresses")
+
     def click_new_address_link(self):
         self.wait_until_text_in_element(
             (By.LINK_TEXT, "New Address"),
@@ -106,4 +109,12 @@ class AddressesListPage(BasePage):
 
         self.wait_until_visible(
             (By.CLASS_NAME, "table")
+        )
+
+    def click_show_created_address(self, new_address_url):
+        self.click_on_element(
+            (
+                By.XPATH,
+                f"//*[contains(@data-test, 'show') and contains(@href,'{new_address_url}')]"
+            )
         )

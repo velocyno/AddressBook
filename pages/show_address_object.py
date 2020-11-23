@@ -62,3 +62,8 @@ class ShowAddressPage(BasePage):
     def check_results_shown(self, address_json):
         dict_results = self.get_results_shown()
         assert address_json == dict_results
+
+    def check_success_message(self, message):
+        assert self.find_element(
+            ShowAddressesLocators.locator_result_container
+        ).text.split('\n')[0] == message

@@ -1,11 +1,13 @@
 from pages.sign_up_object import SignUpSearchHelper
 from pages.sign_in_object import SignInSearchHelper
 from pages.common_objects import CommonSearchHelper
+import pytest
 import random
 import string
 import time
 
 
+@pytest.mark.skip(reason="We don't have access to DB to clean created user")
 class TestSignUp:
     def test_sign_in_link(self, browser_fixture):
         sign_up_page = SignUpSearchHelper(browser_fixture)

@@ -1,14 +1,13 @@
 from base.base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from pages.new_address_object import Converters
+import platform
 
 
 class EditAddressesLocators:
-    # locator_new_address_link = (By.LINK_TEXT, "New Address")
     locator_list_link = (By.LINK_TEXT, "List")
     locator_show_address_link = (By.LINK_TEXT, "Show")
-    # locator_edit_address_link = (By.LINK_TEXT, "Edit")
-    # locator_destroy_address_link = (By.LINK_TEXT, "Destroy")
     locator_first_name_field = (By.NAME, "address[first_name]")
     locator_last_name_field = (By.NAME, "address[last_name]")
     locator_address1_field = (By.NAME, "address[address1]")
@@ -30,9 +29,6 @@ class EditAddressesLocators:
     locator_reading = (By.ID, "address_interest_read")
     locator_note = (By.ID, "address_note")
     locator_update_address_btn = (By.NAME, "commit")
-    # locator_result_container = (By.CLASS_NAME, "container")
-    # locator_container_options = (By.XPATH, "//p")
-    # locator_destroyed_message = (By.XPATH, "/html/body/div/div")
     locator_required_fields_error = (By.XPATH, ".//div[@id = 'error_explanation']")
 
 
@@ -75,6 +71,10 @@ class EditAddressPage(BasePage):
     def clean_field(self, locator):
         return self.find_element(locator).clear()
 
+    def clean_fields(self, locators_list):
+        for locator in locators_list:
+            self.clean_field(locator)
+
     def click_update_address_btn(self):
         self.wait_until_element_clickable(
             (By.NAME, "commit")
@@ -90,25 +90,115 @@ class EditAddressPage(BasePage):
             (By.CLASS_NAME, "container")
         )
 
+    def edit_address(self, data_json):
+        converter = Converters()
+        self.clean_fields(
+            [
+                EditAddressesLocators.locator_first_name_field,
+                EditAddressesLocators.locator_last_name_field,
+                EditAddressesLocators.locator_address1_field,
+                EditAddressesLocators.locator_address2_field,
+                EditAddressesLocators.locator_city,
+                EditAddressesLocators.locator_zip_code,
+                EditAddressesLocators.locator_age,
+                EditAddressesLocators.locator_website,
+                EditAddressesLocators.locator_phone,
+                EditAddressesLocators.locator_note
+            ]
+        )
 
-# class Converters:
-#     def hex_to_rgb(self, value):
-#         value = value.lstrip('#')
-#         lv = len(value)
-#         return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
-#
-#     def rgb_to_hex(self, rgb_str):
-#         rgb_tuple = self.str_to_tuple(rgb_str)
-#         return '#%02x%02x%02x' % rgb_tuple
-#
-#     def date_converter(self, date):
-#         mm, dd, yyyy = date.split('/')
-#         return f'{dd}/{mm}/{yyyy}'
-#
-#     def str_to_tuple(self, data):
-#         list_int_numbers = []
-#         list_str_numbers = data[1:-1].split(", ")
-#         for number in list_str_numbers:
-#             list_int_numbers.append(int(number))
-#         tuple_numbers = tuple(list_int_numbers)
-#         return tuple_numbers
+        self.set_data_to_field(
+            EditAddressesLocators.locator_first_name_field,
+            data_json["dict_edit_address"]["First name:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_last_name_field,
+            data_json["dict_edit_address"]["Last name:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_address1_field,
+            data_json["dict_edit_address"]["Street Address:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_address2_field,
+            data_json["dict_edit_address"]["Secondary Address:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_city,
+            data_json["dict_edit_address"]["City:"]
+        )
+
+        self.select_dropdown_option(
+            EditAddressesLocators.locator_state,
+            data_json["dict_edit_address"]["State:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_zip_code,
+            data_json["dict_edit_address"]["Zip code:"]
+        )
+
+        self.select_state(
+            data_json["dict_edit_address"]["Country:"]
+        )
+
+        if platform.system() == "Linux":
+            self.set_data_to_field(
+                EditAddressesLocators.locator_birthday,
+                data_json["dict_edit_address"]["Birthday:"]
+            )
+        else:
+            self.set_data_to_field(
+                EditAddressesLocators.locator_birthday,
+                converter.date_converter(
+                    data_json["dict_edit_address"]["Birthday:"]
+                )
+            )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_color,
+            converter.rgb_to_hex(
+                data_json["dict_edit_address"]["Color:"]
+            )
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_age,
+            data_json["dict_edit_address"]["Age:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_website,
+            data_json["dict_edit_address"]["Website:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_phone,
+            data_json["dict_edit_address"]["Phone:"]
+        )
+
+        self.click_on_element_if_yes(
+            EditAddressesLocators.locator_climbing,
+            data_json["dict_edit_address"]["Climbing?"]
+        )
+
+        self.click_on_element_if_yes(
+            EditAddressesLocators.locator_dancing,
+            data_json["dict_edit_address"]["Dancing?"]
+        )
+
+        self.click_on_element_if_yes(
+            EditAddressesLocators.locator_reading,
+            data_json["dict_edit_address"]["Reading?"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_note,
+            data_json["dict_edit_address"]["Note:"]
+        )
+
+        self.click_update_address_btn()

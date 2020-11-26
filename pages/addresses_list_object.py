@@ -111,10 +111,24 @@ class AddressesListPage(BasePage):
             (By.CLASS_NAME, "table")
         )
 
-    def click_show_created_address(self, new_address_url):
+    def click_address_navigation_link(self, navigator, new_address_url):
         self.click_on_element(
             (
                 By.XPATH,
-                f"//*[contains(@data-test, 'show') and contains(@href,'{new_address_url}')]"
+                f"//*[contains(@data-test, '{navigator}') and contains(@href,'{new_address_url}')]"
             )
         )
+
+    def click_show_created_address(self, new_address_url):
+        self.click_address_navigation_link("show", new_address_url)
+
+    def click_edit_created_address(self, new_address_url):
+        self.click_address_navigation_link("edit", new_address_url)
+
+    def destroy_created_address(self, new_address_url):
+        self.click_address_navigation_link("destroy", new_address_url)
+        self.click_ok_on_alert()
+
+    def check_destroyed_message(self, message):
+        assert self.find_element(
+            AddressesListLocators.locator_destroyed_message).text == message

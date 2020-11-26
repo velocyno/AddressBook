@@ -31,3 +31,11 @@ class TestEditAddress:
         edit_address_page.edit_address(data_fixture_js)
         show_address_page.check_success_message("Address was successfully updated.")
         show_address_page.check_results_shown(data_fixture_js["dict_edit_address"])
+
+
+class TestDestroyAddress:
+    def test_destroy_address(self, add_address_fixture, browser_fixture):
+        address_list_page = AddressesListPage(browser_fixture)
+        address_list_page.navigate()
+        address_list_page.destroy_created_address(add_address_fixture)
+        address_list_page.check_destroyed_message("Address was successfully destroyed.")

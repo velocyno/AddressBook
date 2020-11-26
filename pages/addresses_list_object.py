@@ -125,5 +125,10 @@ class AddressesListPage(BasePage):
     def click_edit_created_address(self, new_address_url):
         self.click_address_navigation_link("edit", new_address_url)
 
-    def click_destroy_created_address(self, new_address_url):
+    def destroy_created_address(self, new_address_url):
         self.click_address_navigation_link("destroy", new_address_url)
+        self.click_ok_on_alert()
+
+    def check_destroyed_message(self, message):
+        assert self.find_element(
+            AddressesListLocators.locator_destroyed_message).text == message

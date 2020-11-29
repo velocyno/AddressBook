@@ -17,13 +17,19 @@ def browser_fixture():
     driver.quit()
 
 
-@pytest.fixture
+@pytest.fixture(scope="class")
 def data_fixture_js():
     cur_path = pathlib.Path(__file__).parent
     json_file = open(f'{cur_path}/test_input_data/qa.json')
     data_from_file = json.load(json_file)
     yield data_from_file
     json_file.close()
+
+
+@pytest.fixture(scope="class")
+def log_in(browser_fixture, data_fixture_js):
+    log_in_helper = TestHelper.LogIn()
+    log_in_helper.log_in(browser_fixture, data_fixture_js)
 
 
 @pytest.fixture

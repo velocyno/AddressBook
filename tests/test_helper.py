@@ -161,3 +161,15 @@ class TestHelper:
             delete_address['address'].append(show_address_url)
 
             return show_address_url.split(addresses_list_page.base_url)[1]
+
+    class LogIn:
+        def log_in(self, browser_fixture, data_fixture_js):
+            session_email = data_fixture_js["session_email2"]
+            session_password = data_fixture_js["session_password2"]
+
+            page = SignInSearchHelper(browser_fixture)
+
+            page.go_to_sign_in_page()
+            page.type_sign_in_email(session_email)
+            page.type_sign_in_password(session_password)
+            page.click_sign_in_btn()

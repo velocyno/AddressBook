@@ -30,6 +30,7 @@ class NewAddressLocators:
 
 
 class NewAddressPage(BasePage):
+
     def click_on_element_if_yes(self, locator, option):
         element = self.find_element(locator)
         if option == 'Yes':
@@ -87,6 +88,42 @@ class NewAddressPage(BasePage):
         self.find_element(
             (By.CLASS_NAME, "container")
         )
+
+    def provide_required_fields(self, data_json):
+        self.set_data_to_field(
+            NewAddressLocators.locator_first_name_field,
+            data_json['test_input']['first_name']
+        )
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_last_name_field,
+            data_json['test_input']["last_name"]
+        )
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_address1_field,
+            data_json['test_input']["address1"]
+        )
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_city,
+            data_json['test_input']["city"]
+        )
+
+        self.set_data_to_field(
+            NewAddressLocators.locator_zip_code,
+            data_json['test_input']["zip_code"]
+        )
+
+        self.click_on_element(
+            NewAddressLocators.locator_create_address_btn
+        )
+
+    def check_required_fields_error(self, message):
+        error_message = self.get_text_from_element(
+            NewAddressLocators.locator_required_fields_error
+        )
+        assert error_message == message
 
 
 class Converters:

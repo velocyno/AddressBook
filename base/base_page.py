@@ -52,3 +52,6 @@ class BasePage:
 
     def go_to_sign_in_page(self):
         return self.driver.get(self.base_url + "sign_in")
+
+    def get_text_from_element(self, locator):
+        return self.find_element(locator, time=2).text

@@ -48,56 +48,12 @@ class TestAddAddressNegative:
             self,
             log_in,
             browser_fixture,
-            data_fixture_js,
             data_gen
     ):
-        # session_email = data_fixture_js["session_email"]
-        # session_password = data_fixture_js["session_password"]
-        # page = SignInSearchHelper(browser_fixture)
-        common = CommonSearchHelper(browser_fixture)
         addresses = AddressesListPage(browser_fixture)
-        # new_address_page = NewAddressPage(browser_fixture)
-        #
-        # page.go_to_sign_in_page()
-        # page.type_sign_in_email(session_email)
-        # page.type_sign_in_password(session_password)
-        # page.click_sign_in_btn()
-        common.click_addresses()
-        #
+        new_address_page = NewAddressPage(browser_fixture)
+
+        addresses.navigate()
         addresses.click_new_address_link()
-        #
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_first_name_field,
-        #     data_gen['test_input']['first_name']
-        # )
-        #
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_last_name_field,
-        #     data_gen['test_input']["last_name"]
-        # )
-        #
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_address1_field,
-        #     data_gen['test_input']["address1"]
-        # )
-        #
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_city,
-        #     data_gen['test_input']["city"]
-        # )
-        #
-        # new_address_page.set_data_to_field(
-        #     NAL.locator_zip_code,
-        #     data_gen['test_input']["zip_code"]
-        # )
-        #
-        # new_address_page.click_on_element(
-        #     NAL.locator_create_address_btn
-        # )
-        #
-        # error_message = common.get_text_from_element(
-        #     NAL.locator_required_fields_error
-        # )
-        # assert error_message == data_gen["expected"]
-        #
-        # common.click_sign_out()
+        new_address_page.provide_required_fields(data_gen)
+        new_address_page.check_required_fields_error(data_gen["expected"])

@@ -109,96 +109,147 @@ class EditAddressPage(BasePage):
 
         self.set_data_to_field(
             EditAddressesLocators.locator_first_name_field,
-            data_json["dict_edit_address"]["First name:"]
+            data_json["First name:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_last_name_field,
-            data_json["dict_edit_address"]["Last name:"]
+            data_json["Last name:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_address1_field,
-            data_json["dict_edit_address"]["Street Address:"]
+            data_json["Street Address:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_address2_field,
-            data_json["dict_edit_address"]["Secondary Address:"]
+            data_json["Secondary Address:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_city,
-            data_json["dict_edit_address"]["City:"]
+            data_json["City:"]
         )
 
         self.select_dropdown_option(
             EditAddressesLocators.locator_state,
-            data_json["dict_edit_address"]["State:"]
+            data_json["State:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_zip_code,
-            data_json["dict_edit_address"]["Zip code:"]
+            data_json["Zip code:"]
         )
 
         self.select_state(
-            data_json["dict_edit_address"]["Country:"]
+            data_json["Country:"]
         )
 
         if platform.system() == "Linux":
             self.set_data_to_field(
                 EditAddressesLocators.locator_birthday,
-                data_json["dict_edit_address"]["Birthday:"]
+                data_json["Birthday:"]
             )
         else:
             self.set_data_to_field(
                 EditAddressesLocators.locator_birthday,
                 converter.date_converter(
-                    data_json["dict_edit_address"]["Birthday:"]
+                    data_json["Birthday:"]
                 )
             )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_color,
             converter.rgb_to_hex(
-                data_json["dict_edit_address"]["Color:"]
+                data_json["Color:"]
             )
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_age,
-            data_json["dict_edit_address"]["Age:"]
+            data_json["Age:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_website,
-            data_json["dict_edit_address"]["Website:"]
+            data_json["Website:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_phone,
-            data_json["dict_edit_address"]["Phone:"]
+            data_json["Phone:"]
         )
 
         self.click_on_element_if_yes(
             EditAddressesLocators.locator_climbing,
-            data_json["dict_edit_address"]["Climbing?"]
+            data_json["Climbing?"]
         )
 
         self.click_on_element_if_yes(
             EditAddressesLocators.locator_dancing,
-            data_json["dict_edit_address"]["Dancing?"]
+            data_json["Dancing?"]
         )
 
         self.click_on_element_if_yes(
             EditAddressesLocators.locator_reading,
-            data_json["dict_edit_address"]["Reading?"]
+            data_json["Reading?"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_note,
-            data_json["dict_edit_address"]["Note:"]
+            data_json["Note:"]
         )
 
         self.click_update_address_btn()
+
+    def check_required_fields_error(self, message):
+        error_message = self.get_text_from_element(
+            EditAddressesLocators.locator_required_fields_error
+        )
+        assert error_message == message
+
+    def provide_required_fields(self, data_json):
+        self.clean_fields(
+            [
+                EditAddressesLocators.locator_first_name_field,
+                EditAddressesLocators.locator_last_name_field,
+                EditAddressesLocators.locator_address1_field,
+                EditAddressesLocators.locator_address2_field,
+                EditAddressesLocators.locator_city,
+                EditAddressesLocators.locator_zip_code,
+                EditAddressesLocators.locator_age,
+                EditAddressesLocators.locator_website,
+                EditAddressesLocators.locator_phone,
+                EditAddressesLocators.locator_note
+            ]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_first_name_field,
+            data_json['First name:']
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_last_name_field,
+            data_json["Last name:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_address1_field,
+            data_json["Street Address:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_city,
+            data_json["City:"]
+        )
+
+        self.set_data_to_field(
+            EditAddressesLocators.locator_zip_code,
+            data_json["Zip code:"]
+        )
+
+        self.click_on_element(
+            EditAddressesLocators.locator_update_address_btn
+        )

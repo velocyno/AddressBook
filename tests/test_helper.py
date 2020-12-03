@@ -27,9 +27,11 @@ class TestHelper:
 
     class AddAddress:
         def add_address(self, browser_fixture, data_fixture_js, delete_address):
-            session_email = data_fixture_js["session_email2"]
-            session_password = data_fixture_js["session_password2"]
-
+            try:
+                session_email = data_fixture_js["session_email2"]
+                session_password = data_fixture_js["session_password2"]
+            except TimeoutException:
+                pass
             page = SignInSearchHelper(browser_fixture)
             common = CommonSearchHelper(browser_fixture)
             addresses_list_page = AddressesListPage(browser_fixture)

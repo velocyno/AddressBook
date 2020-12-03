@@ -32,7 +32,7 @@ def log_in(browser_fixture, data_fixture_js):
     log_in_helper.log_in(browser_fixture, data_fixture_js)
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def add_address_fixture(browser_fixture, data_fixture_js, delete_address):
     add_address_helper = TestHelper.AddAddress()
     address_url = add_address_helper.add_address(browser_fixture, data_fixture_js, delete_address)

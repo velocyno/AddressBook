@@ -28,7 +28,7 @@ class TestEditAddress:
         edit_address_page = EditAddressPage(browser_fixture)
         address_list_page.navigate()
         address_list_page.click_edit_created_address(add_address_fixture)
-        edit_address_page.edit_address(data_fixture_js)
+        edit_address_page.edit_address(data_fixture_js["dict_edit_address"])
         show_address_page.check_success_message("Address was successfully updated.")
         show_address_page.check_results_shown(data_fixture_js["dict_edit_address"])
 

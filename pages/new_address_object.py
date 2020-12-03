@@ -92,27 +92,27 @@ class NewAddressPage(BasePage):
     def provide_required_fields(self, data_json):
         self.set_data_to_field(
             NewAddressLocators.locator_first_name_field,
-            data_json['test_input']['first_name']
+            data_json['first_name']
         )
 
         self.set_data_to_field(
             NewAddressLocators.locator_last_name_field,
-            data_json['test_input']["last_name"]
+            data_json["last_name"]
         )
 
         self.set_data_to_field(
             NewAddressLocators.locator_address1_field,
-            data_json['test_input']["address1"]
+            data_json["address1"]
         )
 
         self.set_data_to_field(
             NewAddressLocators.locator_city,
-            data_json['test_input']["city"]
+            data_json["city"]
         )
 
         self.set_data_to_field(
             NewAddressLocators.locator_zip_code,
-            data_json['test_input']["zip_code"]
+            data_json["zip_code"]
         )
 
         self.click_on_element(

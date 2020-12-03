@@ -14,5 +14,5 @@ class TestAddAddressNegative:
 
         addresses.navigate()
         addresses.click_new_address_link()
-        new_address_page.provide_required_fields(data_gen)
+        new_address_page.provide_required_fields(data_gen["test_input"])
         new_address_page.check_required_fields_error(data_gen["expected"])

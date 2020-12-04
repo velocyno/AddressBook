@@ -93,7 +93,6 @@ class TestEditAddressNegative:
         addresses_list_page = AddressesListPage(browser_fixture)
         edit_address_page = EditAddressPage(browser_fixture)
 
-        breakpoint()
         addresses_list_page.navigate()
         addresses_list_page.click_edit_created_address(add_address_fixture)
         edit_address_page.provide_required_fields(test_input)

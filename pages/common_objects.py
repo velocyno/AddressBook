@@ -25,3 +25,6 @@ class CommonSearchHelper(BasePage):
     def click_addresses(self):
         return self.find_element(
             NavbarLocators.locator_addresses_link, time=2).click()
+
+    def check_usrer_is_not_logged_in(self, email):
+        assert email not in self.navbar_items()

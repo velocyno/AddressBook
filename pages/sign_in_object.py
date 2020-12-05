@@ -52,8 +52,8 @@ class SignInSearchHelper(CommonSearchHelper):
         error_message = self.error_message()
         assert error_message == message
 
-    def check_usrer_is_not_logged_in(self, email):
-        assert email not in self.navbar_items()
+    # def check_usrer_is_not_logged_in(self, email):
+    #     assert email not in self.navbar_items()
 
     def check_email_field_is_active(self):
         email_field = self.driver.switch_to_active_element()

@@ -1,4 +1,5 @@
 from base.base_page import BasePage
+from pages.common_objects import CommonSearchHelper
 from selenium.webdriver.common.by import By
 
 
@@ -10,7 +11,7 @@ class SignUpPageLocators:
     locator_sign_in_link = (By.LINK_TEXT, "Sign in")
 
 
-class SignUpSearchHelper(BasePage):
+class SignUpSearchHelper(CommonSearchHelper):
     def sign_up_page_header(self):
         return self.find_element(
             SignUpPageLocators.locator_sign_up_page_tittle, time=2).text
@@ -34,3 +35,8 @@ class SignUpSearchHelper(BasePage):
     def click_on_sign_in_link(self):
         return self.find_element(
             SignUpPageLocators.locator_sign_in_link, time=2).click()
+
+    def provide_sign_up_credentials(self, email, password):
+        self.type_sign_up_email(email)
+        self.type_sign_up_password(password)
+        self.click_sign_up_btn()

@@ -1,4 +1,5 @@
 from base.base_page import BasePage
+from pages.common_objects import CommonSearchHelper
 from selenium.webdriver.common.by import By
 
 
@@ -13,7 +14,7 @@ class SignInLocators:
     locator_error_message = (By.XPATH, ".//div[@class = 'alert alert-notice']")
 
 
-class SignInSearchHelper(BasePage):
+class SignInSearchHelper(CommonSearchHelper):
     def sign_in_page_header(self):
         return self.find_element(
             SignInLocators.locator_sign_in_page_tittle, time=2).text
@@ -41,3 +42,21 @@ class SignInSearchHelper(BasePage):
     def click_on_sign_up_link(self):
         return self.find_element(
             SignInLocators.locator_sign_up_link, time=2).click()
+
+    def provide_credentials(self, email, password):
+        self.type_sign_in_email(email)
+        self.type_sign_in_password(password)
+        self.click_sign_in_btn()
+
+    def check_error_message(self, message):
+        error_message = self.error_message()
+        assert error_message == message
+
+    def check_usrer_is_not_logged_in(self, email):
+        assert email not in self.navbar_items()
+
+    def check_email_field_is_active(self):
+        email_field = self.driver.switch_to_active_element()
+        placeholder = email_field.get_attribute("placeholder")
+        assert placeholder == "Email"
+

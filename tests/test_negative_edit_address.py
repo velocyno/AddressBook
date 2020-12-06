@@ -4,7 +4,7 @@ from pages.addresses_list_object import AddressesListPage
 from pages.edit_address_object import EditAddressesLocators as EAL
 from pages.edit_address_object import EditAddressPage
 from pages.show_address_object import ShowAddressPage
-from tests.test_helper import TestHelper
+from new_test_suite.test_helper import TestHelper
 import pytest
 
 

@@ -1,6 +1,6 @@
 from pages.sign_up_object import SignUpSearchHelper
 from pages.common_objects import CommonSearchHelper
-from tests.test_helper import TestHelper
+from new_test_suite.test_helper import TestHelper
 import random
 import string
 import pytest

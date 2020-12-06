@@ -2,7 +2,7 @@ import pytest
 import json
 from selenium import webdriver
 from webdriverdownloader import ChromeDriverDownloader
-from tests.test_helper import TestHelper
+from new_test_suite.test_helper import TestHelper
 import pathlib
 import requests
 

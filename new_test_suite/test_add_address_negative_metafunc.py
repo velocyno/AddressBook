@@ -3,12 +3,7 @@ from pages.new_address_object import NewAddressPage
 
 
 class TestAddAddressNegative:
-    def test_error_required_fields_blank(
-            self,
-            log_in,
-            browser_fixture,
-            data_gen
-    ):
+    def test_error_required_fields_blank(self, log_in, browser_fixture, data_gen):
         addresses = AddressesListPage(browser_fixture)
         new_address_page = NewAddressPage(browser_fixture)
 

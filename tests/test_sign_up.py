@@ -18,8 +18,7 @@ class TestSignUp:
         assert sign_in_page.sign_in_page_header() == "Sign in"
 
     def test_sign_up(self, browser_fixture):
-        sign_up_email = "".join(random.choices(string.ascii_lowercase, k=6))\
-                        + "@i.ua"
+        sign_up_email = "".join(random.choices(string.ascii_lowercase, k=6)) + "@i.ua"
         sign_up_password = "".join(random.choices(string.ascii_lowercase, k=6))
         sign_up_page = SignUpSearchHelper(browser_fixture)
         common = CommonSearchHelper(browser_fixture)

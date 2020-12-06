@@ -19,8 +19,7 @@ class TestAddAddressNegative:
         cls.data_gen = [json.load(cls.file)]
         chrome_driver = ChromeDriverDownloader()
         driver_path = chrome_driver.download_and_install()
-        cls.driver = webdriver.Chrome(
-            executable_path=driver_path[0])
+        cls.driver = webdriver.Chrome(executable_path=driver_path[0])
         session_email = cls.data_gen[0]["session_email"]
         session_password = cls.data_gen[0]["session_password"]
         page = SignInSearchHelper(cls.driver)
@@ -38,7 +37,9 @@ class TestAddAddressNegative:
         cls.driver.quit()
         # Do I need some special clean up here (e.g. Log out, ...)
 
-    def test_error_required_fields_blank(self,):
+    def test_error_required_fields_blank(
+        self,
+    ):
         addresses_list_page = AddressesListPage(self.driver)
         new_address_page = NewAddressPage(self.driver)
         common = CommonSearchHelper(self.driver)
@@ -47,32 +48,30 @@ class TestAddAddressNegative:
 
         new_address_page.set_data_to_field(
             NAL.locator_first_name_field,
-            self.data_gen[0]['address_negative']['p1']['test_input']['first_name']
+            self.data_gen[0]["address_negative"]["p1"]["test_input"]["first_name"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_last_name_field,
-            self.data_gen[0]['address_negative']['p1']['test_input']["last_name"]
+            self.data_gen[0]["address_negative"]["p1"]["test_input"]["last_name"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_address1_field,
-            self.data_gen[0]['address_negative']['p1']['test_input']["address1"]
+            self.data_gen[0]["address_negative"]["p1"]["test_input"]["address1"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_city,
-            self.data_gen[0]['address_negative']['p1']['test_input']["city"]
+            self.data_gen[0]["address_negative"]["p1"]["test_input"]["city"],
         )
 
         new_address_page.set_data_to_field(
             NAL.locator_zip_code,
-            self.data_gen[0]['address_negative']['p1']['test_input']["zip_code"]
+            self.data_gen[0]["address_negative"]["p1"]["test_input"]["zip_code"],
         )
 
         new_address_page.click_create_address_btn()
 
-        error_message = common.get_text_from_element(
-            NAL.locator_required_fields_error
-        )
-        assert error_message == self.data_gen[0]['address_negative']['p1']["expected"]
+        error_message = common.get_text_from_element(NAL.locator_required_fields_error)
+        assert error_message == self.data_gen[0]["address_negative"]["p1"]["expected"]

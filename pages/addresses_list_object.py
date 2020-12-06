@@ -16,78 +16,42 @@ class AddressesListPage(BasePage):
         self.driver.get(self.base_url + "addresses")
 
     def click_new_address_link(self):
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "New Address"),
-            "New Address"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "New Address"), "New Address")
 
-        new_address_link = self.driver.find_element(
-            By.LINK_TEXT, "New Address"
-        )
+        new_address_link = self.driver.find_element(By.LINK_TEXT, "New Address")
 
         new_address_link.click()
 
-        self.wait_until_text_in_element(
-            (By.TAG_NAME, "h2"),
-            "New Address"
-        )
+        self.wait_until_text_in_element((By.TAG_NAME, "h2"), "New Address")
 
     def click_show_address_link(self):
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "Show"),
-            "Show"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "Show"), "Show")
 
-        show_link = self.driver.find_element(
-            By.LINK_TEXT, "Show"
-        )
+        show_link = self.driver.find_element(By.LINK_TEXT, "Show")
 
         show_link.click()
 
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "List"),
-            "List"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "List"), "List")
 
     def click_edit_link(self):
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "Edit"),
-            "Edit"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "Edit"), "Edit")
 
-        edit_link = self.driver.find_element(
-            By.LINK_TEXT, "Edit"
-        )
+        edit_link = self.driver.find_element(By.LINK_TEXT, "Edit")
 
         edit_link.click()
 
-        self.wait_until_text_in_element(
-            (By.TAG_NAME, "h2"),
-            "Editing Address"
-        )
+        self.wait_until_text_in_element((By.TAG_NAME, "h2"), "Editing Address")
 
     def click_destroy_link(self):
-        self.find_element(
-            (By.XPATH, "//tr")
-        )
+        self.find_element((By.XPATH, "//tr"))
 
-        self.find_elements(
-            (By.XPATH, "//td")
-        )
+        self.find_elements((By.XPATH, "//td"))
 
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "Show"),
-            "Show"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "Show"), "Show")
 
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "Edit"),
-            "Edit"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "Edit"), "Edit")
 
-        destroy_link = self.driver.find_element(
-            By.LINK_TEXT, "Destroy"
-        )
+        destroy_link = self.driver.find_element(By.LINK_TEXT, "Destroy")
 
         destroy_link.click()
 
@@ -102,20 +66,15 @@ class AddressesListPage(BasePage):
 
         self.wait_until_alert_disappear()
 
-        self.wait_until_text_in_element(
-            (By.LINK_TEXT, "New Address"),
-            "New Address"
-        )
+        self.wait_until_text_in_element((By.LINK_TEXT, "New Address"), "New Address")
 
-        self.wait_until_visible(
-            (By.CLASS_NAME, "table")
-        )
+        self.wait_until_visible((By.CLASS_NAME, "table"))
 
     def click_address_navigation_link(self, navigator, new_address_url):
         self.click_on_element(
             (
                 By.XPATH,
-                f"//*[contains(@data-test, '{navigator}') and contains(@href,'{new_address_url}')]"
+                f"//*[contains(@data-test, '{navigator}') and contains(@href,'{new_address_url}')]",
             )
         )
 
@@ -130,5 +89,7 @@ class AddressesListPage(BasePage):
         self.click_ok_on_alert()
 
     def check_destroyed_message(self, message):
-        assert self.find_element(
-            AddressesListLocators.locator_destroyed_message).text == message
+        assert (
+            self.find_element(AddressesListLocators.locator_destroyed_message).text
+            == message
+        )

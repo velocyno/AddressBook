@@ -22,7 +22,7 @@ class EditAddressesLocators:
     locator_color = (By.NAME, "address[color]")
     locator_age = (By.NAME, "address[age]")
     locator_website = (By.NAME, "address[website]")
-    locator_picture = (By.ID, 'address_picture')
+    locator_picture = (By.ID, "address_picture")
     locator_phone = (By.NAME, "address[phone]")
     locator_climbing = (By.ID, "address_interest_climb")
     locator_dancing = (By.ID, "address_interest_dance")
@@ -35,9 +35,9 @@ class EditAddressesLocators:
 class EditAddressPage(BasePage):
     def click_on_element_if_yes(self, locator, option):
         element = self.find_element(locator)
-        if option == 'Yes':
+        if option == "Yes":
             return element.click()
-        elif option == 'No':
+        elif option == "No":
             element.get_attribute("checked")
             if element.get_attribute("checked"):
                 element.click()
@@ -47,13 +47,10 @@ class EditAddressPage(BasePage):
             raise Exception("Provide 'Yes' or 'No'")
 
     def set_data_to_field(self, field_locator, data):
-        return self.find_element(
-            field_locator, time=2)\
-            .send_keys(data)
+        return self.find_element(field_locator, time=2).send_keys(data)
 
     def select_dropdown_option(self, dropdown_locator, value):
-        dropdown = Select(self.find_element(
-            dropdown_locator, time=2))
+        dropdown = Select(self.find_element(dropdown_locator, time=2))
         return dropdown.select_by_value(value)
 
     def select_element_by_locator(self, locator):
@@ -76,19 +73,13 @@ class EditAddressPage(BasePage):
             self.clean_field(locator)
 
     def click_update_address_btn(self):
-        self.wait_until_element_clickable(
-            (By.NAME, "commit")
-        )
+        self.wait_until_element_clickable((By.NAME, "commit"))
 
-        update_address_btn = self.driver.find_element(
-            By.NAME, "commit"
-        )
+        update_address_btn = self.driver.find_element(By.NAME, "commit")
 
         update_address_btn.click()
 
-        self.find_element(
-            (By.CLASS_NAME, "container")
-        )
+        self.find_element((By.CLASS_NAME, "container"))
 
     def edit_address(self, data_json):
         converter = Converters()
@@ -103,103 +94,75 @@ class EditAddressPage(BasePage):
                 EditAddressesLocators.locator_age,
                 EditAddressesLocators.locator_website,
                 EditAddressesLocators.locator_phone,
-                EditAddressesLocators.locator_note
+                EditAddressesLocators.locator_note,
             ]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_first_name_field,
-            data_json["First name:"]
+            EditAddressesLocators.locator_first_name_field, data_json["First name:"]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_last_name_field,
-            data_json["Last name:"]
+            EditAddressesLocators.locator_last_name_field, data_json["Last name:"]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_address1_field,
-            data_json["Street Address:"]
+            EditAddressesLocators.locator_address1_field, data_json["Street Address:"]
         )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_address2_field,
-            data_json["Secondary Address:"]
+            data_json["Secondary Address:"],
         )
 
-        self.set_data_to_field(
-            EditAddressesLocators.locator_city,
-            data_json["City:"]
-        )
+        self.set_data_to_field(EditAddressesLocators.locator_city, data_json["City:"])
 
         self.select_dropdown_option(
-            EditAddressesLocators.locator_state,
-            data_json["State:"]
+            EditAddressesLocators.locator_state, data_json["State:"]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_zip_code,
-            data_json["Zip code:"]
+            EditAddressesLocators.locator_zip_code, data_json["Zip code:"]
         )
 
-        self.select_state(
-            data_json["Country:"]
-        )
+        self.select_state(data_json["Country:"])
 
         if platform.system() == "Linux":
             self.set_data_to_field(
-                EditAddressesLocators.locator_birthday,
-                data_json["Birthday:"]
+                EditAddressesLocators.locator_birthday, data_json["Birthday:"]
             )
         else:
             self.set_data_to_field(
                 EditAddressesLocators.locator_birthday,
-                converter.date_converter(
-                    data_json["Birthday:"]
-                )
+                converter.date_converter(data_json["Birthday:"]),
             )
 
         self.set_data_to_field(
             EditAddressesLocators.locator_color,
-            converter.rgb_to_hex(
-                data_json["Color:"]
-            )
+            converter.rgb_to_hex(data_json["Color:"]),
         )
 
-        self.set_data_to_field(
-            EditAddressesLocators.locator_age,
-            data_json["Age:"]
-        )
+        self.set_data_to_field(EditAddressesLocators.locator_age, data_json["Age:"])
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_website,
-            data_json["Website:"]
+            EditAddressesLocators.locator_website, data_json["Website:"]
         )
 
-        self.set_data_to_field(
-            EditAddressesLocators.locator_phone,
-            data_json["Phone:"]
+        self.set_data_to_field(EditAddressesLocators.locator_phone, data_json["Phone:"])
+
+        self.click_on_element_if_yes(
+            EditAddressesLocators.locator_climbing, data_json["Climbing?"]
         )
 
         self.click_on_element_if_yes(
-            EditAddressesLocators.locator_climbing,
-            data_json["Climbing?"]
+            EditAddressesLocators.locator_dancing, data_json["Dancing?"]
         )
 
         self.click_on_element_if_yes(
-            EditAddressesLocators.locator_dancing,
-            data_json["Dancing?"]
+            EditAddressesLocators.locator_reading, data_json["Reading?"]
         )
 
-        self.click_on_element_if_yes(
-            EditAddressesLocators.locator_reading,
-            data_json["Reading?"]
-        )
-
-        self.set_data_to_field(
-            EditAddressesLocators.locator_note,
-            data_json["Note:"]
-        )
+        self.set_data_to_field(EditAddressesLocators.locator_note, data_json["Note:"])
 
         self.click_update_address_btn()
 
@@ -221,35 +184,26 @@ class EditAddressPage(BasePage):
                 EditAddressesLocators.locator_age,
                 EditAddressesLocators.locator_website,
                 EditAddressesLocators.locator_phone,
-                EditAddressesLocators.locator_note
+                EditAddressesLocators.locator_note,
             ]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_first_name_field,
-            data_json['First name:']
+            EditAddressesLocators.locator_first_name_field, data_json["First name:"]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_last_name_field,
-            data_json["Last name:"]
+            EditAddressesLocators.locator_last_name_field, data_json["Last name:"]
         )
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_address1_field,
-            data_json["Street Address:"]
+            EditAddressesLocators.locator_address1_field, data_json["Street Address:"]
         )
+
+        self.set_data_to_field(EditAddressesLocators.locator_city, data_json["City:"])
 
         self.set_data_to_field(
-            EditAddressesLocators.locator_city,
-            data_json["City:"]
+            EditAddressesLocators.locator_zip_code, data_json["Zip code:"]
         )
 
-        self.set_data_to_field(
-            EditAddressesLocators.locator_zip_code,
-            data_json["Zip code:"]
-        )
-
-        self.click_on_element(
-            EditAddressesLocators.locator_update_address_btn
-        )
+        self.click_on_element(EditAddressesLocators.locator_update_address_btn)

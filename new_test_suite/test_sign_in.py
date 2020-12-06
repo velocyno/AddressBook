@@ -10,13 +10,13 @@ class TestSignInPage:
         sign_up_page.click_on_sign_in_link()
         sign_in_page.check_sign_in_header("Sign in")
 
-    def test_sign_in(self, browser_fixture, log_in, data_fixture_js):
+    def test_sign_in(self, browser_fixture, log_in_user2, data_fixture_js):
         sign_in_page = SignInSearchHelper(browser_fixture)
-        sign_in_page.check_usrer_is_logged_in(log_in)
+        sign_in_page.check_usrer_is_logged_in(log_in_user2)
 
 
 class TestSignOut:
-    def test_sign_out(self, browser_fixture, log_in, data_fixture_js):
+    def test_sign_out(self, browser_fixture, log_in_user1, data_fixture_js):
         sign_in_page = SignInSearchHelper(browser_fixture)
         sign_in_page.click_sign_out()
-        sign_in_page.check_usrer_is_not_logged_in(log_in)
+        sign_in_page.check_usrer_is_not_logged_in(log_in_user1)

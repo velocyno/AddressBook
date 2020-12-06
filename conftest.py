@@ -26,9 +26,24 @@ def data_fixture_js():
 
 
 @pytest.fixture(scope="class")
-def log_in(browser_fixture, data_fixture_js):
+def log_in_user2(browser_fixture, data_fixture_js):
     log_in_helper = TestHelper.LogIn()
-    email = log_in_helper.log_in(browser_fixture, data_fixture_js)
+    email = log_in_helper.log_in(
+        browser_fixture,
+        data_fixture_js["session_email2"],
+        data_fixture_js["session_password2"]
+    )
+    yield email
+
+
+@pytest.fixture(scope="class")
+def log_in_user1(browser_fixture, data_fixture_js):
+    log_in_helper = TestHelper.LogIn()
+    email = log_in_helper.log_in(
+        browser_fixture,
+        data_fixture_js["session_email"],
+        data_fixture_js["session_password"]
+    )
     yield email
 
 

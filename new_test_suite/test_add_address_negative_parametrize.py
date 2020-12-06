@@ -75,7 +75,7 @@ class TestAddAddressNegative:
         ],
     )
     def test_error_required_fields_blank(
-        self, browser_fixture, log_in, data_fixture_js, test_input, expected
+        self, browser_fixture, log_in_user2, data_fixture_js, test_input, expected
     ):
         addresses_list_page = AddressesListPage(browser_fixture)
         new_address_page = NewAddressPage(browser_fixture)

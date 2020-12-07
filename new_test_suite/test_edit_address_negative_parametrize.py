@@ -4,7 +4,6 @@ import pytest
 
 
 class TestEditAddressNegative:
-
     @pytest.mark.parametrize(
         "test_input,expected",
         [

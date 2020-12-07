@@ -9,7 +9,6 @@ import pytest
 
 
 class TestAddAddressNegative:
-
     @classmethod
     def setup_class(cls):
         cur_path = pathlib.Path(__file__).parent
@@ -33,9 +32,7 @@ class TestAddAddressNegative:
         cls.file.close()
         cls.driver.quit()
 
-    @pytest.mark.parametrize(
-        "permutation", ["p1", "p2"]
-    )
+    @pytest.mark.parametrize("permutation", ["p1", "p2"])
     def test_error_required_fields_blank(self, permutation):
         self.addresses_list_page.navigate()
         self.addresses_list_page.click_new_address_link()

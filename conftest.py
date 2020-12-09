@@ -7,16 +7,23 @@ import pathlib
 import requests
 
 
-@pytest.fixture(scope="class")
-def browser_fixture():
+def get_driver_path():
     chrome_driver = ChromeDriverDownloader()
-    driver_path = chrome_driver.download_and_install()
-    driver = webdriver.Chrome(executable_path=driver_path[0])
+    path = chrome_driver.download_and_install()
+    return path[0]
+
+
+driver_path = get_driver_path()
+
+
+@pytest.fixture(scope="function")
+def browser_fixture():
+    driver = webdriver.Chrome(executable_path=driver_path)
     yield driver
     driver.quit()
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def data_fixture_js():
     cur_path = pathlib.Path(__file__).parent
     json_file = open(f"{cur_path}/test_input_data/qa.json")
@@ -25,7 +32,7 @@ def data_fixture_js():
     json_file.close()
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def log_in_user2(browser_fixture, data_fixture_js):
     log_in_helper = TestHelper.LogIn()
     email = log_in_helper.log_in(
@@ -36,7 +43,7 @@ def log_in_user2(browser_fixture, data_fixture_js):
     yield email
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def log_in_user1(browser_fixture, data_fixture_js):
     log_in_helper = TestHelper.LogIn()
     email = log_in_helper.log_in(

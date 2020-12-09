@@ -2,7 +2,7 @@ from pages.sign_in_object import SignInSearchHelper
 from pages.addresses_list_object import AddressesListPage
 from pages.new_address_object import NewAddressPage
 from selenium import webdriver
-from webdriverdownloader import ChromeDriverDownloader
+from conftest import driver_path
 import json
 import pathlib
 import pytest
@@ -12,12 +12,10 @@ class TestAddAddressNegative:
     @classmethod
     def setup_class(cls):
         cur_path = pathlib.Path(__file__).parent
-        cls.file = open(f"{cur_path}\\..\\..\\test_input_data\\qa.json")
+        cls.file = open(f"{cur_path}\\..\\test_input_data\\qa.json")
         cls.data = [json.load(cls.file)]
         cls.data_gen = cls.data[0]["address_negative"]
-        chrome_driver = ChromeDriverDownloader()
-        driver_path = chrome_driver.download_and_install()
-        cls.driver = webdriver.Chrome(executable_path=driver_path[0])
+        cls.driver = webdriver.Chrome(executable_path=driver_path)
         session_email = cls.data[0]["session_email2"]
         session_password = cls.data[0]["session_password2"]
         page = SignInSearchHelper(cls.driver)
